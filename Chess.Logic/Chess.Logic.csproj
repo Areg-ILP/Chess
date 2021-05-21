@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Chess.Data\Chess.Data.csproj" />
+    <ProjectReference Include="..\Chess.Model\Chess.Model.csproj" />
+  </ItemGroup>
+
+</Project>
