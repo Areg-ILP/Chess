@@ -11,7 +11,7 @@ namespace Chess.Data.Models
 
         [JsonRequired]
         [JsonProperty("PasswordHashCode")]
-        public int Password { get; set; }
+        public string Password { get; set; }
 
         [JsonRequired]
         [JsonProperty("PartyCounter")]

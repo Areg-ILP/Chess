@@ -5,8 +5,108 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Chess" Height="722" Width="960" Background="Tan">
     <Grid>
+
+        <!--Board-->
+        <Border Background="NavajoWhite" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="613" Margin="31,52,0,0" VerticalAlignment="Top" Width="645">
+            <Grid>
+                <Label Content="8" HorizontalAlignment="Left" Margin="32,60,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="7" HorizontalAlignment="Left" Margin="32,120,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="6" HorizontalAlignment="Left" Margin="32,180,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="5" HorizontalAlignment="Left" Margin="32,240,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="4" HorizontalAlignment="Left" Margin="32,300,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="3" HorizontalAlignment="Left" Margin="32,360,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="2" HorizontalAlignment="Left" Margin="32,420,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="1" HorizontalAlignment="Left" Margin="32,480,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="A" HorizontalAlignment="Left" Margin="85,560,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="B" HorizontalAlignment="Left" Margin="150,560,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="C" HorizontalAlignment="Left" Margin="215,560,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="D" HorizontalAlignment="Left" Margin="280,560,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="E" HorizontalAlignment="Left" Margin="345,560,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="F" HorizontalAlignment="Left" Margin="410,560,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="G" HorizontalAlignment="Left" Margin="475,560,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="H" HorizontalAlignment="Left" Margin="540,560,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="530" VerticalAlignment="Top" Width="530" Margin="0,28,0,0"/>
+            </Grid>
+        </Border>
+
+        <!--Tabs Control-->
+        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="613" Margin="697,52,0,0" VerticalAlignment="Top" Width="224">
+            <TabControl>
+                <TabItem Header="Game settings">
+                    <Grid  Background="NavajoWhite">
+
+
+                        <!--Create Box-->
+                        <Border x:Name="CreationBorder" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="157" Margin="0,81,0,0" VerticalAlignment="Top" Width="196">
+                            <Grid>
+                                <Label Content="Choose figure" HorizontalAlignment="Left" Height="26" Margin="49,10,0,0" VerticalAlignment="Top" Width="88" FontFamily="Segoe UI Semibold"/>
+                                <ComboBox x:Name="ChooseFigureComboBox" HorizontalAlignment="Center" Height="20" Margin="0,41,0,0" VerticalAlignment="Top" Width="174"/>
+                                <Label Content="Letter" HorizontalAlignment="Left" Height="26" Margin="5,66,0,0" VerticalAlignment="Top" Width="44" FontFamily="Segoe UI Semibold"/>
+                                <ComboBox x:Name="ChooseLetterComboBox" HorizontalAlignment="Left" Height="20" Margin="11,93,0,0" VerticalAlignment="Top" Width="38"/>
+                                <Label Content="Number" HorizontalAlignment="Left" Height="26" Margin="62,67,0,0" VerticalAlignment="Top" Width="62" FontFamily="Segoe UI Semibold"/>
+                                <ComboBox x:Name="ChooseNumberComboBox" HorizontalAlignment="Left" Height="20" Margin="68,93,0,0" VerticalAlignment="Top" Width="38"/>
+                                <CheckBox x:Name="BlackFigureCeckBox" Content="Black" HorizontalAlignment="Left" Margin="129,78,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="WhiteFigureCeckBox" Content="White" HorizontalAlignment="Left" Margin="129,98,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="CreateBtn" Background="Goldenrod" Content="Create" HorizontalAlignment="Center" Margin="0,123,0,0" VerticalAlignment="Top" Width="174" Height="22"/>
+                            </Grid>
+                        </Border>
+
+                        <!--Logs-->
+                        <RichTextBox x:Name="Logs" Background="FloralWhite" HorizontalAlignment="Center" Height="317" Margin="0,256,0,0" VerticalAlignment="Top" Width="196">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text=""/>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+
+                        <!--Color Pick-->
+                        <Image HorizontalAlignment="Left" Height="43" Margin="21,18,0,0" VerticalAlignment="Top" Width="72"/>
+                        <Image HorizontalAlignment="Left" Height="29" Margin="150,18,0,0" VerticalAlignment="Top" Width="49"/>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Account">
+                    <Grid  Background="NavajoWhite" >
+                        <Border BorderThickness="1" BorderBrush="Black">
+                            <Grid>
+                                
+
+                                <!--SignIn Box-->
+                                <Border BorderThickness="1" BorderBrush="Black" Margin="9,190,9,191">
+                                    <Grid>
+                                        <Label Content="Sign in" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+                                        <Label Content="Login" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="46" FontSize="14"/>
+                                        <TextBox x:Name="LoginBox" HorizontalAlignment="Center" Margin="0,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" Height="25"/>
+                                        <Label Content="Password" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="14"/>
+                                        <PasswordBox x:Name="PassBox" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Width="174" Height="25"/>
+                                        <Button x:Name="LogInButton" Background="Goldenrod" Content="Log in" HorizontalAlignment="Center" Margin="0,138,0,0" VerticalAlignment="Top" Width="76" Height="26" Click="LogInButton_Click"/>
+                                        <Button x:Name= "RegistrationButton" BorderBrush="Transparent" Background="NavajoWhite" HorizontalAlignment="Center" Margin="0,169,0,0" VerticalAlignment="Top" Width="142" Click="RegistrationButton_Click" >
+                                            <TextBlock TextDecorations="Underline">If you dont have account</TextBlock>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                </TabItem>
+            </TabControl>
+        </Border>
+
+        <!--Top Menu-->
+        <Menu HorizontalAlignment="Center" Height="23" VerticalAlignment="Top" Width="960">
+            <MenuItem x:Name="PlayBtn" Header="Play" Margin="7 0 0 0" Background="#00000000"/>
+            <MenuItem x:Name="PauseBtn" Header="Pause"></MenuItem>
+            <MenuItem x:Name="HelpBtn" Header="Help"></MenuItem>
+            <MenuItem Header="Mode">
+                <MenuItem x:Name="EndGameModeBtn" Header="Endgame mode"></MenuItem>
+                <MenuItem x:Name="HorsepathModeBtn" Header="Horsepath mode"></MenuItem>
+                <MenuItem x:Name="PvpModeBtn" Header="PVP mode"></MenuItem>
+            </MenuItem>
+        </Menu>
 
     </Grid>
 </Window>
