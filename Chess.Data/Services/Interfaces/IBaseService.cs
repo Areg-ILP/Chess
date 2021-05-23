@@ -9,6 +9,6 @@ namespace Chess.Data.Services.Interfaces
         T Get(int? id);
         void Create(T entity);
         void Update(T entity);
-        void Remove(T entity);
+        void Remove(int? id);
     }
 }

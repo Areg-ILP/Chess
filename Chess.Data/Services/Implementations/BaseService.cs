@@ -36,20 +36,17 @@ namespace Chess.Data.Services.Implementations
             File.WriteAllText(_dataPath,jsonEntitesString);
         }
 
-        public void Remove(T entity)
+        public void Remove(int? id)
         {
-            if(entity == null)
-                throw new NullReferenceException();
-
             var jsonEntites = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(_dataPath));
-            jsonEntites.Remove(jsonEntites.Find(e => e.Id == entity.Id));
+            jsonEntites.Remove(jsonEntites.Find(e => e.Id == id));
             var jsonEntitiesString = JsonConvert.SerializeObject(jsonEntites, Formatting.Indented);
             File.WriteAllText(_dataPath, jsonEntitiesString);
         }
 
         public void Update(T entity)
         {
-            Remove(entity);
+            Remove(entity.Id);
             Create(entity);
         }
     }
