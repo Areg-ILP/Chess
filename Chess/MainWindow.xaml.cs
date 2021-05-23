@@ -60,7 +60,7 @@ namespace Chess
 
         private void SetPersonalAreaElements(UserViewModel user)
         {
-
+            
         }
 
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)

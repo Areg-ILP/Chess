@@ -51,18 +51,22 @@ namespace Chess.Logic.Data_Managment
                     throw new Exception("Busy login");
             }
 
-            var creationDate = DateTime.Now;
             var newUser = new User()
             {
                 Id = users.Count,
                 Login = login,
                 Password = password,
-                CreationDate = creationDate
+                CreationDate = DateTime.Now
             };
 
             _userService.Create(newUser);
 
-            return new UserViewModel { Name = login, CreationDate = creationDate };
+            return new UserViewModel
+            {
+                Id = newUser.Id,
+                Name = login,
+                CreationDate = newUser.CreationDate
+            };
         }
 
         public static void UpdateProfile(UserViewModel user)

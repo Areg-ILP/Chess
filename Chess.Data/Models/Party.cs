@@ -12,7 +12,7 @@ namespace Chess.Data.Models
 
         [JsonRequired]
         [JsonProperty("BlackPlayer")]
-        public string bId { get; set; }
+        public int bId { get; set; }
 
         [JsonRequired]
         [JsonProperty("Logs")]

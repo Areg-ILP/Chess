@@ -9,6 +9,6 @@ namespace Chess.Data.Services.Interfaces
 {
     public interface IUserService : IBaseService<User>
     {
-
+        
     }
 }
