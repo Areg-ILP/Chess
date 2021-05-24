@@ -28,8 +28,5 @@ namespace Chess.Data.Models
         [JsonIgnore]
         public int DrawCount => PartyCount - WinCount - LoseCount;
 
-        [JsonIgnore]
-        public decimal WinRate => WinCount / PartyCount * 100;
-
     }
 }

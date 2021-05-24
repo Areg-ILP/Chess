@@ -10,7 +10,6 @@ namespace Chess.Logic.Data_Managment
         public int WinCount { get; set; }
         public int LoseCount { get; set; }
         public int DrawCount { get; set; }
-        public decimal WinRate { get; set; }
         public DateTime CreationDate { get; set; }
     }
 }

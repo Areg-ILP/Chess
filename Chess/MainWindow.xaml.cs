@@ -100,21 +100,66 @@ namespace Chess
             }
         }
 
+        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (RegisterLoginBox.Text == string.Empty ||
+                RegisterFirstPassBox.Password == string.Empty ||
+                RegisterSecondPassBox.Password == string.Empty)
+            {
+                MessageBox.Show("Input login and password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (RegisterFirstPassBox.Password != RegisterSecondPassBox.Password)
+            {
+                MessageBox.Show("Password mismatch", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            try
+            {
+                CurrentUser = UserManager.Registration(RegisterLoginBox.Text, RegisterFirstPassBox.Password);
+                SetProfileFrontEndSettings();
+                SetPersonalAreaElements(CurrentUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void ChangeViewLogin_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrationBox.Visibility = Visibility.Hidden;
+            SignInBox.Visibility = Visibility.Visible;
+        }
+
+        private void ChangeViewRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            SignInBox.Visibility = Visibility.Hidden;
+            RegistrationBox.Visibility = Visibility.Visible;
+            RegistrationBox.Margin = new Thickness(9, 175, 9, 160);
+        }
+
         private void SetProfileFrontEndSettings()
         {
-
+            SignInBox.Visibility = Visibility.Hidden;
+            RegistrationBox.Visibility = Visibility.Hidden;
+            PersonalAreaBox.Visibility = Visibility.Visible;
         }
 
         private void SetPersonalAreaElements(UserViewModel user)
         {
-            
+            UserNameLabel.Content = user.Name;
+            UserIdLabel.Content = user.Id;
+            UserPartyCountLabel.Content = user.PartyCount;
+            UserWinCountLabel.Content = user.WinCount;
+            UserLoseCountLabel.Content = user.LoseCount;
+            UserDrawCountLabel.Content = user.DrawCount;
+            WinRateBar.Value = user.WinCount * 100 / user.PartyCount;
+            DrawRateBar.Value = user.DrawCount * 100 / user.PartyCount;
         }
-
-        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
 
         #endregion
 
