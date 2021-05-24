@@ -28,8 +28,7 @@ namespace Chess
             InitilizeBoard();
         }
 
-        #region Board
-
+        #region Fundamental
 
         private Button[,] _viewBoard;
 
@@ -71,6 +70,8 @@ namespace Chess
                 top += 66;
             }
         }
+
+
 
         #endregion
 
@@ -147,6 +148,7 @@ namespace Chess
             SignInBox.Visibility = Visibility.Hidden;
             RegistrationBox.Visibility = Visibility.Hidden;
             PersonalAreaBox.Visibility = Visibility.Visible;
+            GameSettingsTabItem.IsEnabled = true;
         }
 
         private void SetPersonalAreaElements(UserViewModel user)
@@ -157,12 +159,52 @@ namespace Chess
             UserWinCountLabel.Content = user.WinCount;
             UserLoseCountLabel.Content = user.LoseCount;
             UserDrawCountLabel.Content = user.DrawCount;
+            UserCreationDateLabel.Content = user.CreationDate;
             WinRateBar.Value = user.WinCount * 100 / user.PartyCount;
             DrawRateBar.Value = user.DrawCount * 100 / user.PartyCount;
         }
 
+
         #endregion
 
+        #region Game Settings
 
+
+
+        private void WhiteColorPickBox_Checked(object sender, RoutedEventArgs e)
+        {
+            WhiteColorPickBox.Click += WhiteColorPickBox_Checked;
+            if(WhiteColorPickBox.IsChecked == true)
+            {
+                WhiteColorPickBox.IsChecked = true;
+                BlackColorPickBox.IsEnabled = false;
+                CreationBorder.IsEnabled = true;
+            }
+            else if( WhiteColorPickBox.IsChecked == false)
+            {
+                WhiteColorPickBox.IsChecked = false;
+                BlackColorPickBox.IsEnabled = true;
+                CreationBorder.IsEnabled = false;
+            }
+        }
+
+        #endregion
+
+        private void BlackColorPickBox_Checked(object sender, RoutedEventArgs e)
+        {
+            BlackColorPickBox.Click += BlackColorPickBox_Checked;
+            if (BlackColorPickBox.IsChecked == true)
+            {
+                BlackColorPickBox.IsChecked = true;
+                WhiteColorPickBox.IsEnabled = false;
+                CreationBorder.IsEnabled = true;
+            }
+            else if(BlackColorPickBox.IsChecked == false)
+            {
+                BlackColorPickBox.IsChecked = false;
+                WhiteColorPickBox.IsEnabled = true;
+                CreationBorder.IsEnabled = false;
+            }
+        }
     }
 }

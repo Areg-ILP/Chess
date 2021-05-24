@@ -2,7 +2,8 @@
 {
     public enum GameType
     {
-        PlayVsComputer,
-        PlayerVsPlayer
+        Endgame,
+        Horsepath,
+        PVP
     }
 }

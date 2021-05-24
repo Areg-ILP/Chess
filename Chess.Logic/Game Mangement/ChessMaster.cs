@@ -55,7 +55,7 @@ namespace Chess.Logic.Game_Mangement
         private void Initilize(GameType gameType, bool colorFlag)
         {
             this.GameType = gameType;
-            if (gameType == GameType.PlayerVsPlayer)
+            if (gameType == GameType.PVP)
             {
                 SetChessboardByDefault(colorFlag);
                 Turn = true;

@@ -37,12 +37,74 @@
         <!--Tabs Control-->
         <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="613" Margin="697,52,0,0" VerticalAlignment="Top" Width="224">
             <TabControl>
-                <TabItem Header="Game settings">
+                <TabItem Header="Account">
+                    <Grid  Background="NavajoWhite" >
+                        
+                        <!--SignIn Box-->
+                        <Border x:Name="SignInBox" BorderThickness="1" BorderBrush="Black" Margin="9,191,9,191" Visibility="Visible">
+                            <Grid>
+                                <Label Content="Sign in" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+                                <Label Content="Login" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="46" FontSize="14"/>
+                                <TextBox x:Name="LoginBox" HorizontalAlignment="Center" Margin="0,53,0,0" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top" Width="174" Height="25"/>
+                                <Label Content="Password" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="14"/>
+                                <PasswordBox x:Name="PassBox" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Width="174" Height="25" FontSize="14"/>
+                                <Button x:Name="LogInButton" Background="Goldenrod" Content="Log in" HorizontalAlignment="Center" Margin="0,138,0,0" VerticalAlignment="Top" Width="76" Height="26" Click="LogInButton_Click"/>
+                                <Button x:Name= "ChangeViewRegistration" BorderBrush="Transparent" Background="NavajoWhite" HorizontalAlignment="Center" Margin="0,169,0,0" VerticalAlignment="Top" Width="142" Click="ChangeViewRegistration_Click">
+                                    <TextBlock TextDecorations="Underline">If you dont have account</TextBlock>
+                                </Button>
+                            </Grid>
+                        </Border>
+                        <Border x:Name="RegistrationBox" BorderThickness="1" BorderBrush="Black" Margin="9,321,9,10" Visibility="Hidden">
+                            <Grid>
+                                <Label Content="Registration" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+                                <Label Content="Login" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="46" FontSize="14"/>
+                                <TextBox x:Name="RegisterLoginBox" HorizontalAlignment="Center" Margin="0,53,0,0" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top" Width="174" Height="25"/>
+                                <Label Content="Password" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="14"/>
+                                <PasswordBox x:Name="RegisterFirstPassBox" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Width="174" Height="25" FontSize="14"/>
+                                <Label Content="Password" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" FontSize="14"/>
+                                <PasswordBox x:Name="RegisterSecondPassBox" HorizontalAlignment="Center" Margin="0,159,0,0" VerticalAlignment="Top" Width="174" Height="25" FontSize="14"/>
+                                <Button x:Name="RegistrationButton" Background="Goldenrod" Content="Registration" HorizontalAlignment="Center" Margin="0,194,0,0" VerticalAlignment="Top" Width="80" Height="26" Click="RegistrationButton_Click"/>
+                                <Button x:Name="ChangeViewLogin" BorderBrush="Transparent" Background="NavajoWhite" HorizontalAlignment="Center" Margin="0,220,0,0" VerticalAlignment="Top" Width="142" Click="ChangeViewLogin_Click">
+                                    <TextBlock TextDecorations="Underline">Back to login box</TextBlock>
+                                </Button>
+                            </Grid>
+                        </Border>
+                        <Border x:Name="PersonalAreaBox" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="561" VerticalAlignment="Center" Width="194" Visibility="Hidden">
+                            <Grid>
+
+                                <!--Last Matches-->
+                                <Label Content="Last Matches" HorizontalAlignment="Center" Height="31" Margin="0,354,0,0" VerticalAlignment="Top" Width="106" FontSize="16"/>
+                                <RichTextBox Background="FloralWhite" HorizontalAlignment="Center" Height="159" Margin="0,390,0,0" VerticalAlignment="Top" Width="172">
+                                </RichTextBox>
+
+                                <!--User Info-->
+                                <Label x:Name="UserNameLabel" Content="Name" HorizontalAlignment="Center" Height="35" Margin="0,10,0,0" VerticalAlignment="Top" Width="64" FontSize="19"/>
+                                <Label x:Name="UserIdLabel" Content="id" HorizontalAlignment="Left" Height="30" Margin="48,42,0,0" VerticalAlignment="Top" Width="30" FontSize="15"/>
+                                <Label Content="ID - " HorizontalAlignment="Left" Height="30" Margin="10,42,0,0" VerticalAlignment="Top" Width="38" FontSize="15"/>
+                                <Label x:Name="UserPartyCountLabel" Content="party" HorizontalAlignment="Center" Height="30" Margin="0,72,0,0" VerticalAlignment="Top" Width="56" FontSize="15"/>
+                                <Label Content="Party - " HorizontalAlignment="Left" Height="30" Margin="10,72,0,0" VerticalAlignment="Top" Width="58" FontSize="15"/>
+                                <Label x:Name="UserWinCountLabel" Content="win" HorizontalAlignment="Left" Height="30" Margin="63,107,0,0" VerticalAlignment="Top" Width="56" FontSize="15"/>
+                                <Label Content="Win - " HorizontalAlignment="Left" Height="30" Margin="10,106,0,0" VerticalAlignment="Top" Width="58" FontSize="15"/>
+                                <Label x:Name="UserLoseCountLabel" Content="lose" HorizontalAlignment="Left" Height="30" Margin="64,142,0,0" VerticalAlignment="Top" Width="56" FontSize="15"/>
+                                <Label Content="Lose - " HorizontalAlignment="Left" Height="30" Margin="10,141,0,0" VerticalAlignment="Top" Width="58" FontSize="15"/>
+                                <Label x:Name="UserDrawCountLabel" Content="draw" HorizontalAlignment="Left" Height="30" Margin="72,176,0,0" VerticalAlignment="Top" Width="56" FontSize="15"/>
+                                <Label Content="Draw - " HorizontalAlignment="Left" Height="30" Margin="10,176,0,0" VerticalAlignment="Top" Width="58" FontSize="15"/>
+                                <Label x:Name="UserCreationDateLabel" Content="creation date" HorizontalAlignment="Left" Height="30" Margin="96,206,0,0" VerticalAlignment="Top" Width="76" FontSize="13"/>
+                                <Label Content="Generated - " HorizontalAlignment="Left" Height="30" Margin="10,206,0,0" VerticalAlignment="Top" Width="109" FontSize="15"/>
+
+                                <!--Statistics-->
+                                <Label Content="Win rate" HorizontalAlignment="Left" Height="30" Margin="10,244,0,0" VerticalAlignment="Top" Width="73" FontSize="14"/>
+                                <ProgressBar x:Name="WinRateBar" HorizontalAlignment="Center" Height="18" Margin="0,279,0,0" VerticalAlignment="Top" Width="172"/>
+                                <Label Content="Draw rate" HorizontalAlignment="Left" Height="30" Margin="10,296,0,0" VerticalAlignment="Top" Width="73" FontSize="14"/>
+                                <ProgressBar x:Name="DrawRateBar" HorizontalAlignment="Center" Height="18" Margin="0,326,0,0" VerticalAlignment="Top" Width="172"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="GameSettingsTabItem" Header="Game settings" IsEnabled="False">
                     <Grid  Background="NavajoWhite">
-
-
                         <!--Create Box-->
-                        <Border x:Name="CreationBorder" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="157" Margin="0,81,0,0" VerticalAlignment="Top" Width="196">
+                        <Border x:Name="CreationBorder" IsEnabled="False" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="157" Margin="0,121,0,0" VerticalAlignment="Top" Width="196">
                             <Grid>
                                 <Label Content="Choose figure" HorizontalAlignment="Left" Height="26" Margin="49,10,0,0" VerticalAlignment="Top" Width="88" FontFamily="Segoe UI Semibold"/>
                                 <ComboBox x:Name="ChooseFigureComboBox" HorizontalAlignment="Center" Height="20" Margin="0,41,0,0" VerticalAlignment="Top" Width="174"/>
@@ -57,83 +119,20 @@
                         </Border>
 
                         <!--Logs-->
-                        <RichTextBox x:Name="Logs" Background="FloralWhite" HorizontalAlignment="Center" Height="317" Margin="0,256,0,0" VerticalAlignment="Top" Width="196"/>
+                        <RichTextBox x:Name="Logs" Background="FloralWhite" HorizontalAlignment="Center" Height="281" Margin="0,292,0,0" VerticalAlignment="Top" Width="196"/>
 
                         <!--Color Pick-->
-                        <Image HorizontalAlignment="Left" Height="43" Margin="21,18,0,0" VerticalAlignment="Top" Width="72"/>
-                        <Image HorizontalAlignment="Left" Height="29" Margin="150,18,0,0" VerticalAlignment="Top" Width="49"/>
-
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Account">
-                    <Grid  Background="NavajoWhite" >
-                        <Border BorderThickness="1" BorderBrush="Black">
+                        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="86" Margin="0,21,0,0" VerticalAlignment="Top" Width="196">
                             <Grid>
-
-
-                                <!--SignIn Box-->
-                                <Border x:Name="SignInBox" BorderThickness="1" BorderBrush="Black" Margin="9,191,9,191" Visibility="Visible">
-                                    <Grid>
-                                        <Label Content="Sign in" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
-                                        <Label Content="Login" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="46" FontSize="14"/>
-                                        <TextBox x:Name="LoginBox" HorizontalAlignment="Center" Margin="0,53,0,0" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top" Width="174" Height="25"/>
-                                        <Label Content="Password" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                        <PasswordBox x:Name="PassBox" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Width="174" Height="25" FontSize="14"/>
-                                        <Button x:Name="LogInButton" Background="Goldenrod" Content="Log in" HorizontalAlignment="Center" Margin="0,138,0,0" VerticalAlignment="Top" Width="76" Height="26" Click="LogInButton_Click"/>
-                                        <Button x:Name= "ChangeViewRegistration" BorderBrush="Transparent" Background="NavajoWhite" HorizontalAlignment="Center" Margin="0,169,0,0" VerticalAlignment="Top" Width="142" Click="ChangeViewRegistration_Click">
-                                            <TextBlock TextDecorations="Underline">If you dont have account</TextBlock>
-                                        </Button>
-                                    </Grid>
-                                </Border>
-                                <Border x:Name="RegistrationBox" BorderThickness="1" BorderBrush="Black" Margin="9,321,9,10" Visibility="Hidden">
-                                    <Grid>
-                                        <Label Content="Registration" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
-                                        <Label Content="Login" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="46" FontSize="14"/>
-                                        <TextBox x:Name="RegisterLoginBox" HorizontalAlignment="Center" Margin="0,53,0,0" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top" Width="174" Height="25"/>
-                                        <Label Content="Password" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                        <PasswordBox x:Name="RegisterFirstPassBox" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Width="174" Height="25" FontSize="14"/>
-                                        <Label Content="Password" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                        <PasswordBox x:Name="RegisterSecondPassBox" HorizontalAlignment="Center" Margin="0,159,0,0" VerticalAlignment="Top" Width="174" Height="25" FontSize="14"/>
-                                        <Button x:Name="RegistrationButton" Background="Goldenrod" Content="Registration" HorizontalAlignment="Center" Margin="0,194,0,0" VerticalAlignment="Top" Width="80" Height="26" Click="RegistrationButton_Click"/>
-                                        <Button x:Name="ChangeViewLogin" BorderBrush="Transparent" Background="NavajoWhite" HorizontalAlignment="Center" Margin="0,220,0,0" VerticalAlignment="Top" Width="142" Click="ChangeViewLogin_Click">
-                                            <TextBlock TextDecorations="Underline">Back to login box</TextBlock>
-                                        </Button>
-                                    </Grid>
-                                </Border>
-                                <Border x:Name="PersonalAreaBox" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="561" VerticalAlignment="Center" Width="194" Visibility="Hidden">
-                                    <Grid>
-                                        
-                                        <!--Last Matches--> 
-                                        <Label Content="Last Matches" HorizontalAlignment="Center" Height="31" Margin="0,354,0,0" VerticalAlignment="Top" Width="106" FontSize="16"/>
-                                        <RichTextBox Background="FloralWhite" HorizontalAlignment="Center" Height="159" Margin="0,390,0,0" VerticalAlignment="Top" Width="172">
-                                        </RichTextBox>
-                                        
-                                        <!--User Info-->
-                                        <Label x:Name="UserNameLabel" Content="Name" HorizontalAlignment="Center" Height="35" Margin="0,10,0,0" VerticalAlignment="Top" Width="64" FontSize="19"/>
-                                        <Label x:Name="UserIdLabel" Content="id" HorizontalAlignment="Left" Height="30" Margin="53,57,0,0" VerticalAlignment="Top" Width="30" FontSize="16"/>
-                                        <Label Content="ID - " HorizontalAlignment="Left" Height="30" Margin="10,57,0,0" VerticalAlignment="Top" Width="38" FontSize="16"/>
-                                        <Label x:Name="UserPartyCountLabel" Content="party" HorizontalAlignment="Center" Height="30" Margin="0,92,0,0" VerticalAlignment="Top" Width="56" FontSize="16"/>
-                                        <Label Content="Party - " HorizontalAlignment="Left" Height="30" Margin="10,92,0,0" VerticalAlignment="Top" Width="58" FontSize="16"/>
-                                        <Label x:Name="UserWinCountLabel" Content="win" HorizontalAlignment="Left" Height="30" Margin="64,127,0,0" VerticalAlignment="Top" Width="56" FontSize="16"/>
-                                        <Label Content="Win - " HorizontalAlignment="Left" Height="30" Margin="10,127,0,0" VerticalAlignment="Top" Width="58" FontSize="16"/>
-                                        <Label x:Name="UserLoseCountLabel" Content="lose" HorizontalAlignment="Center" Height="30" Margin="0,162,0,0" VerticalAlignment="Top" Width="56" FontSize="16"/>
-                                        <Label Content="Lose - " HorizontalAlignment="Left" Height="30" Margin="10,162,0,0" VerticalAlignment="Top" Width="58" FontSize="16"/>
-                                        <Label x:Name="UserDrawCountLabel" Content="draw" HorizontalAlignment="Center" Height="30" Margin="0,197,0,0" VerticalAlignment="Top" Width="56" FontSize="16"/>
-                                        <Label Content="Draw - " HorizontalAlignment="Left" Height="30" Margin="10,197,0,0" VerticalAlignment="Top" Width="58" FontSize="16"/>
-                                        
-                                        <!--Statistics-->
-                                        <Label Content="Win rate" HorizontalAlignment="Left" Height="30" Margin="10,244,0,0" VerticalAlignment="Top" Width="73" FontSize="14"/>
-                                        <ProgressBar x:Name="WinRateBar" HorizontalAlignment="Center" Height="18" Margin="0,279,0,0" VerticalAlignment="Top" Width="172"/>
-                                        <Label Content="Draw rate" HorizontalAlignment="Left" Height="30" Margin="10,296,0,0" VerticalAlignment="Top" Width="73" FontSize="14"/>
-                                        <ProgressBar x:Name="DrawRateBar" HorizontalAlignment="Center" Height="18" Margin="0,326,0,0" VerticalAlignment="Top" Width="172"/>
-                                        
-                                    </Grid>
-                                </Border>
+                                <Image Source = "Images\WhiteKing.png" HorizontalAlignment="Left" Height="55" Margin="28,3,0,0" VerticalAlignment="Top" Width="55"/>
+                                <Image Source = "Images\BlackKing.png" HorizontalAlignment="Left" Height="55" Margin="112,3,0,0" VerticalAlignment="Top" Width="55"/>
+                                <CheckBox x:Name="WhiteColorPickBox" HorizontalAlignment="Left" Margin="47,59,0,0" VerticalAlignment="Top" Checked="WhiteColorPickBox_Checked" />
+                                <CheckBox x:Name="BlackColorPickBox" HorizontalAlignment="Left" Margin="131,59,0,0" VerticalAlignment="Top" Checked="BlackColorPickBox_Checked"/>
                             </Grid>
                         </Border>
                     </Grid>
-
                 </TabItem>
+
             </TabControl>
         </Border>
 

@@ -56,7 +56,7 @@ namespace Chess.Logic.Data_Managment
                 Id = users.Count,
                 Login = login,
                 Password = password,
-                CreationDate = DateTime.Now
+                CreationDate = DateTime.Today
             };
 
             _userService.Create(newUser);
