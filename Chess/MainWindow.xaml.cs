@@ -28,7 +28,6 @@ namespace Chess
             InitializeComponent();
             InitilizeBoard();
             InitilizeMaster();
-            SetEvents();
             SetChoosebuttonParametrs();
         }
 
@@ -49,8 +48,8 @@ namespace Chess
         /// </summary>
         private void InitilizeBoard()
         {
-            _viewBoard = new Button[8,8];
-            
+            _viewBoard = new Button[8, 8];
+
             int left, top = 0;
             var colors = new SolidColorBrush[] { Brushes.SaddleBrown, Brushes.LemonChiffon };
 
@@ -73,7 +72,7 @@ namespace Chess
                     _viewBoard[i, j].Background = colors[(j % 2 == 0) ? 1 : 0];
                     _viewBoard[i, j].Width = 66;
                     _viewBoard[i, j].Height = 66;
-                    _viewBoard[i, j].Margin = new Thickness(left,top,0,0);
+                    _viewBoard[i, j].Margin = new Thickness(left, top, 0, 0);
                     _viewBoard[i, j].IsEnabled = true;
                     _viewBoard[i, j].HorizontalAlignment = HorizontalAlignment.Left;
                     _viewBoard[i, j].VerticalAlignment = VerticalAlignment.Top;
@@ -130,20 +129,74 @@ namespace Chess
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-       
+
         #endregion
 
         #region Events Settings
-        
-        //mb
-        private void SetEvents()
+
+        private void SetEventsAfterLogin()
         {
-            CreateBtn.Click += CreateBtnClick_ComputerMode;
+            PlayBtn.Click += PlayClick;
+            RestartBtn.Click += RestartClick;
+            HelpBtn.Click += HelpClick;
+            SaveBtn.Click += SaveClick;
+        }
+
+        private void PlayClick(object sender, EventArgs e)
+        {
+            if (ChessMaster.GameType == GameType.Endgame)
+            {
+                if (!ChessMaster.IsStartableGame()) return;
+                else CreationBorder.IsEnabled = false;
+            }
+
             foreach (var vb in _viewBoard)
             {
                 vb.Click += ImageClick;
                 vb.Click += ClickToChange;
             }
+            PlayBtn.IsEnabled = false;
+
+            MessageBox.Show("Good luck , have fun !", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void RestartClick(object sender, EventArgs e)
+        {
+            ImageVipe();
+            switch (ChessMaster.GameType)
+            {
+                case GameType.PVP:
+                    ChessMaster.SetChessboardDefaultParametrs();
+                    break;
+                case GameType.Endgame:
+                case GameType.Horsepath:
+                    ChessMaster.SetEmptyBoard();
+                    CreationBorder.IsEnabled = true;
+                    break;
+            }
+            Logs.Document.Blocks.Clear();
+            SetAllFiguresImages();
+        }
+
+        private void HelpClick(object sender, EventArgs e)
+        {
+            switch (ChessMaster.GameType)
+            {
+                case GameType.PVP:
+                    MessageBox.Show("Press play button", "Help", MessageBoxButton.OK, MessageBoxImage.Information);
+                    break;
+                case GameType.Endgame:
+                    MessageBox.Show("Places figures and play", "Help", MessageBoxButton.OK, MessageBoxImage.Information);
+                    break;
+                case GameType.Horsepath:
+                    MessageBox.Show("Pick horse , and click any cell", "Help", MessageBoxButton.OK, MessageBoxImage.Information);
+                    break;
+            }
+        }
+
+        private void SaveClick(object sender, EventArgs e)
+        {
+            //mb
         }
 
         #endregion
@@ -166,6 +219,7 @@ namespace Chess
                 CurrentUser = UserManager.SignIn(LoginBox.Text, PassBox.Password);
                 SetProfileFrontEndSettings();
                 SetPersonalAreaElements(CurrentUser);
+                SetEventsAfterLogin();
             }
             catch (Exception ex)
             {
@@ -195,6 +249,7 @@ namespace Chess
                 CurrentUser = UserManager.Registration(RegisterLoginBox.Text, RegisterFirstPassBox.Password);
                 SetProfileFrontEndSettings();
                 SetPersonalAreaElements(CurrentUser);
+                SetEventsAfterLogin();
             }
             catch (Exception ex)
             {
@@ -237,59 +292,9 @@ namespace Chess
             DrawRateBar.Value = user.DrawCount * 100 / user.PartyCount;
         }
 
-
         #endregion
 
-        #region Game Settings
-
-        /// <summary>
-        /// White color pick check box checked event
-        /// </summary>
-        /// <param name="sender">white color pick check box</param>
-        /// <param name="e"></param>
-        private void WhiteColorPickBox_Checked(object sender, RoutedEventArgs e)
-        {
-            WhiteColorPickBox.Click += WhiteColorPickBox_Checked;
-            if(WhiteColorPickBox.IsChecked == true)
-            {
-                WhiteColorPickBox.IsChecked = true;
-                BlackColorPickBox.IsEnabled = false;
-                CreationBorder.IsEnabled = true;
-            }
-            else if( WhiteColorPickBox.IsChecked == false)
-            {
-                WhiteColorPickBox.IsChecked = false;
-                BlackColorPickBox.IsEnabled = true;
-                CreationBorder.IsEnabled = false;
-            }
-        }
-
-        /// <summary>
-        /// Black color pick check box checked event
-        /// </summary>
-        /// <param name="sender">black color pick check box</param>
-        /// <param name="e"></param>
-        private void BlackColorPickBox_Checked(object sender, RoutedEventArgs e)
-        {
-            BlackColorPickBox.Click += BlackColorPickBox_Checked;
-            if (BlackColorPickBox.IsChecked == true)
-            {
-                BlackColorPickBox.IsChecked = true;
-                WhiteColorPickBox.IsEnabled = false;
-                CreationBorder.IsEnabled = true;
-            }
-            else if (BlackColorPickBox.IsChecked == false)
-            {
-                BlackColorPickBox.IsChecked = false;
-                WhiteColorPickBox.IsEnabled = true;
-                CreationBorder.IsEnabled = false;
-            }
-        }
-
-
-        #endregion
-
-        #region Create box
+        #region Create and Color Pick
 
         /// <summary>
         /// Create button click event for computer mode
@@ -320,6 +325,11 @@ namespace Chess
             {
                 MessageBox.Show("\tOOPS!\nSomething went wrong", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void CreateBtnClick_Horsepath(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -373,6 +383,74 @@ namespace Chess
             BlackFigureCheckBox.IsChecked = false;
         }
 
+        /// <summary>
+        /// White color pick check box checked event
+        /// </summary>
+        /// <param name="sender">white color pick check box</param>
+        /// <param name="e"></param>
+        private void WhiteColorPickBox_Checked(object sender, RoutedEventArgs e)
+        {
+            WhiteColorPickBox.Click += WhiteColorPickBox_Checked;
+            if (WhiteColorPickBox.IsChecked == true)
+            {
+                WhiteColorPickBox.IsChecked = true;
+                BlackColorPickBox.IsEnabled = false;
+                ChessMaster.ChangePlayerColor(true);
+                ImageVipe();
+                Logs.Document.Blocks.Clear();
+                if (ChessMaster.GameType != GameType.PVP)
+                {
+                    ChessMaster.SetEmptyBoard();
+                    CreationBorder.IsEnabled = true;
+                }
+                else
+                {
+                    ChessMaster.SetChessboardDefaultParametrs();
+                }
+                SetAllFiguresImages();
+            }
+            else if (WhiteColorPickBox.IsChecked == false)
+            {
+                WhiteColorPickBox.IsChecked = false;
+                BlackColorPickBox.IsEnabled = true;
+                CreationBorder.IsEnabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Black color pick check box checked event
+        /// </summary>
+        /// <param name="sender">black color pick check box</param>
+        /// <param name="e"></param>
+        private void BlackColorPickBox_Checked(object sender, RoutedEventArgs e)
+        {
+            BlackColorPickBox.Click += BlackColorPickBox_Checked;
+            if (BlackColorPickBox.IsChecked == true)
+            {
+                BlackColorPickBox.IsChecked = true;
+                WhiteColorPickBox.IsEnabled = false;
+                ChessMaster.ChangePlayerColor(false);
+                ImageVipe();
+                Logs.Document.Blocks.Clear();
+                if (ChessMaster.GameType != GameType.PVP)
+                {
+                    ChessMaster.SetEmptyBoard();
+                    CreationBorder.IsEnabled = true;
+                }
+                else
+                {
+                    ChessMaster.SetChessboardDefaultParametrs();
+                }
+                SetAllFiguresImages();
+            }
+            else if (BlackColorPickBox.IsChecked == false)
+            {
+                BlackColorPickBox.IsChecked = false;
+                WhiteColorPickBox.IsEnabled = true;
+                CreationBorder.IsEnabled = false;
+            }
+        }
+
         #endregion
 
         #region Move Settings
@@ -409,10 +487,7 @@ namespace Chess
                         _currentFigureOnClick = figureViewModel;
                         _currentFigureRecomendations = ChessMaster.GetRecomendationsByFigure(figureViewModel);
                         _isClicked = true;
-                        //front
-                        //SetClickedPointColor(position);
                         SetRecomendations();
-                        //SetEatPoints();
                     }
                 }
             }
@@ -430,8 +505,8 @@ namespace Chess
                                 SetAllFiguresImages();
                                 SetLogs(_currentFigureOnClick, recomendedPoint);
                                 _isClicked = false;
-                                if (CheckEventsInBoard(_currentFigureOnClick.ColorFlag))
-                                    Board.IsEnabled = false;
+                                if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag))
+                                    GameDebuff();
                             }
                         }
                         else
@@ -444,8 +519,8 @@ namespace Chess
                                 SetLogs(_currentFigureOnClick, recomendedPoint);
                                 SetLogs(brainFigure, brainPoint);
                                 _isClicked = false;
-                                if (CheckEventsInBoard(brainFigure.ColorFlag))
-                                    Board.IsEnabled = false;
+                                if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag))
+                                    GameDebuff();
                             }
                         }
                         break;
@@ -458,8 +533,30 @@ namespace Chess
                     _isClicked = false;
                 }
                 //SetDefaultColors();
-                //SetClickedDefaultPoint();
             }
+        }
+
+        private void GameDebuff()
+        {
+            SetMoveEventsFlag(false);
+            Logs.Document.Blocks.Clear();
+            PlayBtn.IsEnabled = true;
+        }
+
+        private void SetMoveEventsFlag(bool add)
+        {
+            if(add)
+                foreach (var vb in _viewBoard)
+                {
+                    vb.Click += ImageClick;
+                    vb.Click += ClickToChange;
+                }
+            else
+                foreach (var vb in _viewBoard)
+                {
+                    vb.Click -= ImageClick;
+                    vb.Click -= ClickToChange;
+                }
         }
 
         /// <summary>
@@ -467,7 +564,7 @@ namespace Chess
         /// </summary>
         /// <param name="colorFlag">color to check</param>
         /// <returns>true if mate or stale mate else false</returns>
-        private bool CheckEventsInBoard(bool colorFlag)
+        private bool CheckGameEventsInBoard(bool colorFlag)
         {
             bool endFlag = false;
             switch (ChessMaster.GetEventsInBoard(colorFlag))
@@ -493,9 +590,9 @@ namespace Chess
         {
             foreach (var recomendedPoint in _currentFigureRecomendations)
             {
-                if(_viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Content == null)
+                if (_viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Content == null)
                 {
-                    Image img = new Image();
+                    var img = new Image();
                     img.Source = ViewManager.GetRecomendedPoint();
                     _viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Content = img;
                 }
@@ -540,7 +637,7 @@ namespace Chess
         }
 
         #endregion
-
+        
         #region Choose Figure
 
         /// <summary>
@@ -597,10 +694,9 @@ namespace Chess
             ImageVipe();
             SetAllFiguresImages();
             FigureChooseBorder.Visibility = Visibility.Hidden;
-            foreach (var pb in _viewBoard)
-                pb.IsEnabled = true;
-            if (CheckEventsInBoard(_currentFigureOnClick.ColorFlag))
-                Board.IsEnabled = false;
+            SetMoveEventsFlag(true);
+            if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag))
+                GameDebuff();
         }
 
         /// <summary>
@@ -610,7 +706,7 @@ namespace Chess
         /// <param name="e">event args</param>
         private void ClickToChange(object sender, EventArgs e)
         {
-            if(!_isClicked)
+            if (!_isClicked)
                 IsNeedChangeFigure();
         }
 
@@ -640,8 +736,7 @@ namespace Chess
                     if (figure.FigureName == "Pawn")
                     {
                         FigureChooseBorder.Visibility = Visibility.Visible;
-                        //foreach (var pb in _viewBoard)
-                        //    pb.IsEnabled = false;
+                        SetMoveEventsFlag(false);
                         SetChooseImages(figure.ColorFlag);
                         ChessMaster.ChangePawn((j, i));
                     }

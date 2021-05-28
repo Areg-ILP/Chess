@@ -46,8 +46,8 @@
         </Border>
 
         <!--Tabs Control-->
-        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="613" Margin="697,52,0,0" VerticalAlignment="Top" Width="224">
-            <TabControl>
+        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="613" Margin="690,52,0,0" VerticalAlignment="Top" Width="231">
+            <TabControl Margin="0 0 0 0">
                 <TabItem Header="Account">
                     <Grid  Background="NavajoWhite" >
 
@@ -174,7 +174,7 @@
         <!--Top Menu-->
         <Menu HorizontalAlignment="Center" Height="23" VerticalAlignment="Top" Width="960" FontSize="13">
             <MenuItem x:Name="PlayBtn" Header="Play" Margin="7 0 0 0" Background="#00000000"/>
-            <MenuItem x:Name="PauseBtn" Header="Restart"></MenuItem>
+            <MenuItem x:Name="RestartBtn" Header="Restart"></MenuItem>
             <MenuItem x:Name="SaveBtn" Header="Save"></MenuItem>
             <MenuItem x:Name="HelpBtn" Header="Help"></MenuItem>
             <MenuItem Header="Mode">

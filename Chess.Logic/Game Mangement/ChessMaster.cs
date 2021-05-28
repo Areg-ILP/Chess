@@ -61,6 +61,17 @@ namespace Chess.Logic.Game_Mangement
             Turn = true;
         }
 
+        public void SetHorsePath()
+        {
+
+        }
+
+        public void ChangePlayerColor(bool colorFlag)
+        {
+            _firstPlayerColor = colorFlag ? ColorEnum.White : ColorEnum.Black;
+            _secondPlayerColor = colorFlag ? ColorEnum.Black : ColorEnum.White;
+        }
+
         /// <summary>
         /// Initilze Chess master
         /// </summary>
