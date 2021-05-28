@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,6 +29,7 @@ namespace Chess
             InitializeComponent();
             InitilizeBoard();
             InitilizeMaster();
+            SetEventsBeforeLogin();
             SetChoosebuttonParametrs();
         }
 
@@ -134,6 +136,12 @@ namespace Chess
 
         #region Events Settings
 
+        private void SetEventsBeforeLogin()
+        {
+            //LinkedInButton.Click += OpenLinkedInPage();
+            //GitHubButton.Click += OpenGitHubPage();
+        }
+
         private void SetEventsAfterLogin()
         {
             PlayBtn.Click += PlayClick;
@@ -197,6 +205,21 @@ namespace Chess
         private void SaveClick(object sender, EventArgs e)
         {
             //mb
+        }
+
+        private void EndGameModeClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HorsepathModeClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PVPModeClick(object sender, EventArgs e)
+        {
+
         }
 
         #endregion
@@ -475,12 +498,12 @@ namespace Chess
         /// <param name="e">event args</param>
         private void ImageClick(object sender, EventArgs e)
         {
-            var p = sender as Button;
+            var point = sender as Button;
             if (!_isClicked)
             {
-                if (p != null && p.Content != null)
+                if (point != null && point.Content != null)
                 {
-                    var position = GetPointbyImage(p);
+                    var position = GetPointbyImage(point);
                     var figureViewModel = ChessMaster.GetFigureByPosition(position);
                     if (figureViewModel.ColorFlag == ChessMaster.Turn)
                     {
@@ -495,34 +518,27 @@ namespace Chess
             {
                 foreach (var recomendedPoint in _currentFigureRecomendations)
                 {
-                    if (recomendedPoint == GetPointbyImage(p))
+                    if (recomendedPoint == GetPointbyImage(point))
                     {
+                        ImageVipe();
                         if (ChessMaster.GameType == GameType.PVP)
                         {
                             if (ChessMaster.Play(_currentFigureOnClick, recomendedPoint))
-                            {
-                                ImageVipe();
-                                SetAllFiguresImages();
                                 SetLogs(_currentFigureOnClick, recomendedPoint);
-                                _isClicked = false;
-                                if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag))
-                                    GameDebuff();
-                            }
                         }
-                        else
+                        else if(ChessMaster.GameType == GameType.Endgame)
                         {
                             if (ChessMaster.PlayWithBrain(_currentFigureOnClick, recomendedPoint,
-                                                            out FigureViewModel brainFigure, out (int, int) brainPoint))
+                                       out FigureViewModel brainFigure, out (int, int) brainPoint))
                             {
-                                ImageVipe();
-                                SetAllFiguresImages();
                                 SetLogs(_currentFigureOnClick, recomendedPoint);
                                 SetLogs(brainFigure, brainPoint);
-                                _isClicked = false;
-                                if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag))
-                                    GameDebuff();
                             }
                         }
+                        _isClicked = false;
+                        SetAllFiguresImages();
+                        if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag))
+                            GameDebuff();
                         break;
                     }
                 }
@@ -536,6 +552,9 @@ namespace Chess
             }
         }
 
+        /// <summary>
+        /// Debuff game
+        /// </summary>
         private void GameDebuff()
         {
             SetMoveEventsFlag(false);
@@ -543,6 +562,10 @@ namespace Chess
             PlayBtn.IsEnabled = true;
         }
 
+        /// <summary>
+        /// By flag set events or remove
+        /// </summary>
+        /// <param name="add">add flag</param>
         private void SetMoveEventsFlag(bool add)
         {
             if(add)

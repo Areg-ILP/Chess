@@ -181,12 +181,14 @@ namespace Chess.Logic.Game_Mangement
                     message = "Mate";
             }
             else
+            {
                 if (ChessBoard.IsStaleMate(colorBy))
-                message = "StaleMate";
+                    message = "StaleMate";
+            }
             return message;
         }
 
-        public (int w,int b) GetStatisticsForPredictor()
+        public (int w, int b) GetStatisticsForPredictor()
         {
             int whiteCounter, blackCounter;
             whiteCounter = blackCounter = 0;

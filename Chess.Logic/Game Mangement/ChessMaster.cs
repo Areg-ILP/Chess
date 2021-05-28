@@ -47,31 +47,6 @@ namespace Chess.Logic.Game_Mangement
             Initilize(GameType.PVP, true);
         }
 
-        public void SetModeEndgame()
-        {
-            this.GameType = GameType.Endgame;
-            SetChessboardByComputerMode(true);
-            Turn = _firstPlayerColor == ColorEnum.White;
-        }
-
-        public void SetModePVP()
-        {
-            this.GameType = GameType.PVP;
-            SetChessboardByDefault(true);
-            Turn = true;
-        }
-
-        public void SetHorsePath()
-        {
-
-        }
-
-        public void ChangePlayerColor(bool colorFlag)
-        {
-            _firstPlayerColor = colorFlag ? ColorEnum.White : ColorEnum.Black;
-            _secondPlayerColor = colorFlag ? ColorEnum.Black : ColorEnum.White;
-        }
-
         /// <summary>
         /// Initilze Chess master
         /// </summary>
@@ -274,6 +249,16 @@ namespace Chess.Logic.Game_Mangement
         }
 
         /// <summary>
+        /// Change color of players
+        /// </summary>
+        /// <param name="colorFlag">color flag</param>
+        public void ChangePlayerColor(bool colorFlag)
+        {
+            _firstPlayerColor = colorFlag ? ColorEnum.White : ColorEnum.Black;
+            _secondPlayerColor = colorFlag ? ColorEnum.Black : ColorEnum.White;
+        }
+
+        /// <summary>
         /// Current position of changable figure
         /// </summary>
         private (int x, int y) _currentPosition;
@@ -322,5 +307,27 @@ namespace Chess.Logic.Game_Mangement
 
         #endregion
 
+        #region Mode changes
+
+        public void SetModeEndgame()
+        {
+            this.GameType = GameType.Endgame;
+            SetChessboardByComputerMode(true);
+            Turn = _firstPlayerColor == ColorEnum.White;
+        }
+
+        public void SetModePVP()
+        {
+            this.GameType = GameType.PVP;
+            SetChessboardByDefault(true);
+            Turn = true;
+        }
+
+        public void SetHorsePath()
+        {
+
+        }
+
+        #endregion
     }
 }
