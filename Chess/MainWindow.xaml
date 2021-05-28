@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="Chess" Height="722" Width="960" Background="Tan" ResizeMode="CanMinimize">
+        Title="Chess" WindowStartupLocation="CenterScreen" Height="722" Width="960" Background="Tan" ResizeMode="CanMinimize">
     <Grid>
 
         <!--Board-->
-        <Border Background="NavajoWhite" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="613" Margin="31,52,0,0" VerticalAlignment="Top" Width="645">
+        <Border Background="NavajoWhite" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="613" Margin="23,52,0,0" VerticalAlignment="Top" Width="645">
             <Grid>
                 <Label Content="8" HorizontalAlignment="Left" Margin="32,45,0,0" VerticalAlignment="Top" FontSize="18"/>
                 <Label Content="7" HorizontalAlignment="Left" Margin="32,111,0,0" VerticalAlignment="Top" FontSize="18"/>
@@ -28,7 +28,18 @@
                 <Label Content="G" HorizontalAlignment="Left" Margin="475,560,0,0" VerticalAlignment="Top" FontSize="18"/>
                 <Label Content="H" HorizontalAlignment="Left" Margin="542,560,0,0" VerticalAlignment="Top" FontSize="18"/>
                 <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="530" VerticalAlignment="Top" Width="530" Margin="0,28,0,0">
-                    <Grid x:Name="Board"/>
+                    <Grid x:Name="Board">
+                        <Border x:Name="FigureChooseBorder" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="214" Margin="0,198,0,0" VerticalAlignment="Top" Width="220" Background="Tan">
+                            <Grid>
+                                <Button x:Name="QueenChooseButton" HorizontalAlignment="Left" Height="66" Margin="33,40,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
+                                <Button x:Name="HorseChooseButton" HorizontalAlignment="Left" Height="66" Margin="122,125,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
+                                <Button x:Name="RookChooseButton" HorizontalAlignment="Left" Height="66" Margin="122,40,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
+                                <Button x:Name="BishopChooseButton" HorizontalAlignment="Left" Height="66" Margin="33,125,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
+                                <Label Content="Choose Figure" HorizontalAlignment="Center" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" Width="98" FontSize="13"/>
+
+                            </Grid>
+                        </Border>
+                    </Grid>
                 </Border>
 
             </Grid>
@@ -39,7 +50,7 @@
             <TabControl>
                 <TabItem Header="Account">
                     <Grid  Background="NavajoWhite" >
-                        
+
                         <!--SignIn Box-->
                         <Border x:Name="SignInBox" BorderThickness="1" BorderBrush="Black" Margin="9,191,9,191" Visibility="Visible">
                             <Grid>
@@ -74,8 +85,7 @@
 
                                 <!--Last Matches-->
                                 <Label Content="Last Matches" HorizontalAlignment="Center" Height="31" Margin="0,354,0,0" VerticalAlignment="Top" Width="106" FontSize="16"/>
-                                <RichTextBox Background="FloralWhite" HorizontalAlignment="Center" Height="159" Margin="0,390,0,0" VerticalAlignment="Top" Width="172">
-                                </RichTextBox>
+                                <RichTextBox x:Name="LastMatches" Background="FloralWhite" IsReadOnly="True" HorizontalAlignment="Center" Height="159" Margin="0,390,0,0" VerticalAlignment="Top" Width="172"/>
 
                                 <!--User Info-->
                                 <Label x:Name="UserNameLabel" Content="Name" HorizontalAlignment="Center" Height="35" Margin="0,10,0,0" VerticalAlignment="Top" Width="64" FontSize="19"/>
@@ -107,19 +117,44 @@
                         <Border x:Name="CreationBorder" IsEnabled="False" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="157" Margin="0,121,0,0" VerticalAlignment="Top" Width="196">
                             <Grid>
                                 <Label Content="Choose figure" HorizontalAlignment="Left" Height="26" Margin="49,10,0,0" VerticalAlignment="Top" Width="88" FontFamily="Segoe UI Semibold"/>
-                                <ComboBox x:Name="ChooseFigureComboBox" HorizontalAlignment="Center" Height="20" Margin="0,41,0,0" VerticalAlignment="Top" Width="174"/>
+                                <ComboBox x:Name="ChooseFigureBox" HorizontalAlignment="Center" Height="20" Margin="0,41,0,0" VerticalAlignment="Top" Width="174">
+                                    <ComboBoxItem Content="King"/>
+                                    <ComboBoxItem Content="Queen"/>
+                                    <ComboBoxItem Content="Rook"/>
+                                    <ComboBoxItem Content="Horse"/>
+                                    <ComboBoxItem Content="Bishop"/>
+                                    <ComboBoxItem Content="Pawn"/>
+                                </ComboBox>
                                 <Label Content="Letter" HorizontalAlignment="Left" Height="26" Margin="5,66,0,0" VerticalAlignment="Top" Width="44" FontFamily="Segoe UI Semibold"/>
-                                <ComboBox x:Name="ChooseLetterComboBox" HorizontalAlignment="Left" Height="20" Margin="11,93,0,0" VerticalAlignment="Top" Width="38"/>
+                                <ComboBox x:Name="ChooseLetterBox" HorizontalAlignment="Left" Height="20" Margin="11,93,0,0" VerticalAlignment="Top" Width="38">
+                                    <ComboBoxItem Content="A"/>
+                                    <ComboBoxItem Content="B"/>
+                                    <ComboBoxItem Content="C"/>
+                                    <ComboBoxItem Content="D"/>
+                                    <ComboBoxItem Content="E"/>
+                                    <ComboBoxItem Content="F"/>
+                                    <ComboBoxItem Content="G"/>
+                                    <ComboBoxItem Content="H"/>
+                                </ComboBox>
                                 <Label Content="Number" HorizontalAlignment="Left" Height="26" Margin="62,67,0,0" VerticalAlignment="Top" Width="62" FontFamily="Segoe UI Semibold"/>
-                                <ComboBox x:Name="ChooseNumberComboBox" HorizontalAlignment="Left" Height="20" Margin="68,93,0,0" VerticalAlignment="Top" Width="38"/>
-                                <CheckBox x:Name="BlackFigureCeckBox" Content="Black" HorizontalAlignment="Left" Margin="129,78,0,0" VerticalAlignment="Top"/>
-                                <CheckBox x:Name="WhiteFigureCeckBox" Content="White" HorizontalAlignment="Left" Margin="129,98,0,0" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="ChooseNumberBox" HorizontalAlignment="Left" Height="20" Margin="68,93,0,0" VerticalAlignment="Top" Width="38">
+                                    <ComboBoxItem Content="1"/>
+                                    <ComboBoxItem Content="2"/>
+                                    <ComboBoxItem Content="3"/>
+                                    <ComboBoxItem Content="4"/>
+                                    <ComboBoxItem Content="5"/>
+                                    <ComboBoxItem Content="6"/>
+                                    <ComboBoxItem Content="7"/>
+                                    <ComboBoxItem Content="8"/>
+                                </ComboBox>
+                                <CheckBox x:Name="BlackFigureCheckBox" Content="Black" HorizontalAlignment="Left" Margin="129,78,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="WhiteFigureCheckBox" Content="White" HorizontalAlignment="Left" Margin="129,98,0,0" VerticalAlignment="Top"/>
                                 <Button x:Name="CreateBtn" Background="Goldenrod" Content="Create" HorizontalAlignment="Center" Margin="0,123,0,0" VerticalAlignment="Top" Width="174" Height="22"/>
                             </Grid>
                         </Border>
 
                         <!--Logs-->
-                        <RichTextBox x:Name="Logs" Background="FloralWhite" HorizontalAlignment="Center" Height="281" Margin="0,292,0,0" VerticalAlignment="Top" Width="196"/>
+                        <RichTextBox x:Name="Logs" IsReadOnly="True" Background="FloralWhite" HorizontalAlignment="Center" Height="281" Margin="0,292,0,0" VerticalAlignment="Top" Width="196"/>
 
                         <!--Color Pick-->
                         <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="86" Margin="0,21,0,0" VerticalAlignment="Top" Width="196">
@@ -143,9 +178,11 @@
             <MenuItem x:Name="SaveBtn" Header="Save"></MenuItem>
             <MenuItem x:Name="HelpBtn" Header="Help"></MenuItem>
             <MenuItem Header="Mode">
-                <MenuItem x:Name="EndGameModeBtn" Header="Endgame"></MenuItem>
-                <MenuItem x:Name="HorsepathModeBtn" Header="Horsepath"></MenuItem>
-                <MenuItem x:Name="PvpModeBtn" Header="PVP"></MenuItem>
+                <MenuItem x:Name="EndGameModeBtn" Icon="Images\EndGame.png" Header="Endgame"/>
+                <MenuItem x:Name="HorsepathModeBtn" Header="Horsepath"/>
+                <MenuItem x:Name="PvpModeBtn" Header="PVP">
+                    <!--<Image Source="Images\BlackHorse.png"  />-->
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="About">
                 <MenuItem x:Name="LinkedInButton" Header="LinkedIn"></MenuItem>

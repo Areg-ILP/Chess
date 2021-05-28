@@ -42,9 +42,23 @@ namespace Chess.Logic.Game_Mangement
         /// </summary>
         /// <param name="gameType">game type</param>
         /// <param name="colorFlag">color flag</param>
-        public ChessMaster(GameType gameType, bool colorFlag)
+        public ChessMaster()
         {
-            Initilize(gameType, colorFlag);
+            Initilize(GameType.PVP, true);
+        }
+
+        public void SetModeEndgame()
+        {
+            this.GameType = GameType.Endgame;
+            SetChessboardByComputerMode(true);
+            Turn = _firstPlayerColor == ColorEnum.White;
+        }
+
+        public void SetModePVP()
+        {
+            this.GameType = GameType.PVP;
+            SetChessboardByDefault(true);
+            Turn = true;
         }
 
         /// <summary>
