@@ -138,8 +138,8 @@ namespace Chess
 
         private void SetEventsBeforeLogin()
         {
-            //LinkedInButton.Click += OpenLinkedInPage();
-            //GitHubButton.Click += OpenGitHubPage();
+            //LinkedInButton.Click += OpenLinkedInPage;
+            //GitHubButton.Click += OpenGitHubPage;
         }
 
         private void SetEventsAfterLogin()
@@ -148,6 +148,10 @@ namespace Chess
             RestartBtn.Click += RestartClick;
             HelpBtn.Click += HelpClick;
             SaveBtn.Click += SaveClick;
+            EndGameModeBtn.Click += EndGameModeClick;
+            HorsepathModeBtn.Click += HorsepathModeClick;
+            PvpModeBtn.Click += PVPModeClick;
+            CreateBtn.Click += CreateBtnClick;
         }
 
         private void PlayClick(object sender, EventArgs e)
@@ -209,17 +213,27 @@ namespace Chess
 
         private void EndGameModeClick(object sender, EventArgs e)
         {
-
+            ChessMaster.SetModeEndgame();
+            OnChangeMode();
         }
 
         private void HorsepathModeClick(object sender, EventArgs e)
         {
-
+            ChessMaster.SetModeHorsePath();
+            OnChangeMode();
         }
 
         private void PVPModeClick(object sender, EventArgs e)
         {
+            ChessMaster.SetModePVP();
+            OnChangeMode();
+        }
 
+        private void OnChangeMode()
+        {
+            GameDebuff();
+            ImageVipe();
+            SetAllFiguresImages();
         }
 
         #endregion
@@ -324,7 +338,7 @@ namespace Chess
         /// </summary>
         /// <param name="sender">Create button</param>
         /// <param name="e"></param>
-        private void CreateBtnClick_ComputerMode(object sender, EventArgs e)
+        private void CreateBtnClick(object sender, EventArgs e)
         {
             if (!CheckCreationArguments())
                 return;
@@ -348,11 +362,6 @@ namespace Chess
             {
                 MessageBox.Show("\tOOPS!\nSomething went wrong", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void CreateBtnClick_Horsepath(object sender, EventArgs e)
-        {
-
         }
 
         /// <summary>
@@ -498,12 +507,12 @@ namespace Chess
         /// <param name="e">event args</param>
         private void ImageClick(object sender, EventArgs e)
         {
-            var point = sender as Button;
+            var b = sender as Button;
+            var position = GetPointbyImage(b);
             if (!_isClicked)
             {
-                if (point != null && point.Content != null)
+                if (b != null && b.Content != null)
                 {
-                    var position = GetPointbyImage(point);
                     var figureViewModel = ChessMaster.GetFigureByPosition(position);
                     if (figureViewModel.ColorFlag == ChessMaster.Turn)
                     {
@@ -518,7 +527,7 @@ namespace Chess
             {
                 foreach (var recomendedPoint in _currentFigureRecomendations)
                 {
-                    if (recomendedPoint == GetPointbyImage(point))
+                    if (recomendedPoint == position)
                     {
                         ImageVipe();
                         if (ChessMaster.GameType == GameType.PVP)
@@ -548,7 +557,7 @@ namespace Chess
                     SetAllFiguresImages();
                     _isClicked = false;
                 }
-                //SetDefaultColors();
+                SetDefaultColors();
             }
         }
 
@@ -559,6 +568,11 @@ namespace Chess
         {
             SetMoveEventsFlag(false);
             Logs.Document.Blocks.Clear();
+            WhiteColorPickBox.IsChecked = false;
+            BlackColorPickBox.IsChecked = false;
+            WhiteColorPickBox.IsEnabled = true;
+            BlackColorPickBox.IsEnabled = true;
+            CreationBorder.IsEnabled = false;
             PlayBtn.IsEnabled = true;
         }
 
@@ -607,24 +621,48 @@ namespace Chess
         }
 
         /// <summary>
+        /// temp colors for eat points
+        /// </summary>
+        private List<Brush> _tempColors;
+
+        /// <summary>
         /// Set recomendation images in board
         /// </summary>
         private void SetRecomendations()
         {
+            _tempColors = new List<Brush>();
             foreach (var recomendedPoint in _currentFigureRecomendations)
             {
                 if (_viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Content == null)
                 {
-                    var img = new Image();
-                    img.Source = ViewManager.GetRecomendedPoint();
+                    var img = new Image()
+                    {
+                        Source = ViewManager.GetRecomendedPoint()
+                    };
                     _viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Content = img;
                 }
                 else
                 {
-                    //mb suk
-                    //_viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Background = Brushes.Orange;
+                    _tempColors.Add(_viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Background);
+                    _viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Background = Brushes.OrangeRed;
                 }
             }
+        }
+
+        /// <summary>
+        /// Set default colors of points
+        /// </summary>
+        private void SetDefaultColors()
+        {
+            int i = 0;
+            foreach (var recomendedPoint in _currentFigureRecomendations)
+            {
+                if (_viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Background == Brushes.OrangeRed)
+                {
+                    _viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Background = _tempColors[i++];
+                }
+            }
+            _tempColors = default;
         }
 
         /// <summary>
@@ -653,8 +691,8 @@ namespace Chess
         /// <param name="finalPosition">final position</param>
         private void SetLogs(FigureViewModel figure, (int X, int Y) finalPosition)
         {
-            var start = AlhpabetHelper.GetCoordinates(Math.Abs(figure.Position.X - 7), Math.Abs(figure.Position.Y - 8));
-            var end = AlhpabetHelper.GetCoordinates(Math.Abs(finalPosition.X - 7), Math.Abs(finalPosition.Y - 8));
+            var start = AlhpabetHelper.GetCoordinates(Math.Abs(figure.Position.X-7), Math.Abs(figure.Position.Y ));
+            var end = AlhpabetHelper.GetCoordinates(Math.Abs(finalPosition.X-7), Math.Abs(finalPosition.Y ));
             Logs.AppendText(figure.ColorFlag ? "Whites" : "Blacks");
             Logs.AppendText($"\n {++_logsCounter} : {figure.FigureName} : {start} to {end}\n");
         }

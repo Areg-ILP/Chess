@@ -323,7 +323,7 @@ namespace Chess.Logic.Game_Mangement
             Turn = true;
         }
 
-        public void SetHorsePath()
+        public void SetModeHorsePath()
         {
 
         }
