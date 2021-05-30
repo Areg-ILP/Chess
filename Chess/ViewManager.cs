@@ -1,5 +1,6 @@
 ﻿using Chess.Logic;
 using System;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace Chess
@@ -28,34 +29,34 @@ namespace Chess
         /// </summary>
         /// <param name="figure">figure</param>
         /// <returns>image by figure</returns>
-        public static BitmapImage GetImage(FigureViewModel figure)
+        public static Image GetImage(FigureViewModel figure)
         {
             switch (figure.FigureName)
             {
                 case "King":
                     if (!figure.ColorFlag)
-                        return new BitmapImage(new Uri(_imagePathBlackKing));
-                    return new BitmapImage(new Uri(_imagePathWhiteKing));
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackKing)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteKing)) };
                 case "Queen":
                     if (!figure.ColorFlag)
-                        return new BitmapImage(new Uri(_imagePathBlackQueen));
-                    return new BitmapImage(new Uri(_imagePathWhiteQueen));
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackQueen)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteQueen)) };
                 case "Rook":
                     if (!figure.ColorFlag)
-                        return new BitmapImage(new Uri(_imagePathBlackRook));
-                    return new BitmapImage(new Uri(_imagePathWhiteRook));
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackRook)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteRook)) };
                 case "Horse":
                     if (!figure.ColorFlag)
-                        return new BitmapImage(new Uri(_imagePathBlackHorse));
-                    return new BitmapImage(new Uri(_imagePathWhiteHorse));
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackHorse)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteHorse)) };
                 case "Bishop":
                     if (!figure.ColorFlag)
-                        return new BitmapImage(new Uri(_imagePathBlackBishop));
-                    return new BitmapImage(new Uri(_imagePathWhiteBishop));
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackBishop)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteBishop)) };
                 case "Pawn":
                     if (!figure.ColorFlag)
-                        return new BitmapImage(new Uri(_imagePathBlackPawn));
-                    return new BitmapImage(new Uri(_imagePathWhitePawn));
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackPawn)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhitePawn)) };
                 default:
                     throw new Exception("Image not Found");
             }
@@ -65,26 +66,31 @@ namespace Chess
         /// Method to Get recomendation images 
         /// </summary>
         /// <returns>image recomendation</returns>
-        public static BitmapImage GetRecomendedPoint()
+        public static Image GetRecomendedPoint()
         {
-            return new BitmapImage(new Uri(_imagePathGrayRecomend));
+            return new Image() { Source = new BitmapImage(new Uri(_imagePathGrayRecomend)) };
         }
 
-        public static BitmapImage GetChooseQueen(bool colorFlag)
+        public static Image GetChooseQueen(bool colorFlag)
         {
-            return colorFlag ? new BitmapImage(new Uri(_imagePathWhiteQueen)) : new BitmapImage(new Uri(_imagePathBlackQueen));
+            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteQueen)) } :
+                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackQueen)) };
         }
-        public static BitmapImage GetChooseRook(bool colorFlag)
+        public static Image GetChooseRook(bool colorFlag)
         {
-            return colorFlag ? new BitmapImage(new Uri(_imagePathWhiteRook)) : new BitmapImage(new Uri(_imagePathBlackRook));
+            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteRook)) } :
+                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackRook)) };
         }
-        public static BitmapImage GetChooseBishop(bool colorFlag)
+        public static Image GetChooseBishop(bool colorFlag)
         {
-            return colorFlag ? new BitmapImage(new Uri(_imagePathWhiteBishop)) : new BitmapImage(new Uri(_imagePathBlackBishop));
+            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteBishop)) } :
+                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackBishop)) };
         }
-        public static BitmapImage GetChooseHorse(bool colorFlag)
+
+        public static Image GetChooseHorse(bool colorFlag)
         {
-            return colorFlag ? new BitmapImage(new Uri(_imagePathWhiteHorse)) : new BitmapImage(new Uri(_imagePathBlackHorse));
+            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteHorse)) } :
+                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackHorse)) };
         }
     }
 }

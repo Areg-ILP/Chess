@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -122,9 +123,7 @@ namespace Chess
         {
             try
             {
-                Image img = new Image();
-                img.Source = ViewManager.GetImage(figure);
-                _viewBoard[figure.Position.X, figure.Position.Y].Content = img;
+                _viewBoard[figure.Position.X, figure.Position.Y].Content = ViewManager.GetImage(figure);
             }
             catch (Exception ex)
             {
@@ -215,12 +214,29 @@ namespace Chess
         {
             ChessMaster.SetModeEndgame();
             OnChangeMode();
+
+            ChooseFigureBox.Items.Clear();
+            ChooseFigureBox.Items.Add("King");
+            ChooseFigureBox.Items.Add("Queen");
+            ChooseFigureBox.Items.Add("Rook");
+            ChooseFigureBox.Items.Add("Horse");
+            ChooseFigureBox.Items.Add("Bishop");
+            ChooseFigureBox.Items.Add("Pawn");
         }
 
         private void HorsepathModeClick(object sender, EventArgs e)
         {
             ChessMaster.SetModeHorsePath();
             OnChangeMode();
+
+            SetMoveEventsFlag(false);
+            foreach (var vb in _viewBoard)
+            {
+                vb.Click += ClickForHorseTask;
+            }
+
+            ChooseFigureBox.Items.Clear();
+            ChooseFigureBox.Items.Add("Horse");
         }
 
         private void PVPModeClick(object sender, EventArgs e)
@@ -485,7 +501,7 @@ namespace Chess
 
         #endregion
 
-        #region Move Settings
+        #region Standart Move Settings
 
         /// <summary>
         /// Check is clicked
@@ -535,7 +551,7 @@ namespace Chess
                             if (ChessMaster.Play(_currentFigureOnClick, recomendedPoint))
                                 SetLogs(_currentFigureOnClick, recomendedPoint);
                         }
-                        else if(ChessMaster.GameType == GameType.Endgame)
+                        else if (ChessMaster.GameType == GameType.Endgame)
                         {
                             if (ChessMaster.PlayWithBrain(_currentFigureOnClick, recomendedPoint,
                                        out FigureViewModel brainFigure, out (int, int) brainPoint))
@@ -582,7 +598,7 @@ namespace Chess
         /// <param name="add">add flag</param>
         private void SetMoveEventsFlag(bool add)
         {
-            if(add)
+            if (add)
                 foreach (var vb in _viewBoard)
                 {
                     vb.Click += ImageClick;
@@ -635,11 +651,7 @@ namespace Chess
             {
                 if (_viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Content == null)
                 {
-                    var img = new Image()
-                    {
-                        Source = ViewManager.GetRecomendedPoint()
-                    };
-                    _viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Content = img;
+                    _viewBoard[recomendedPoint.Item1, recomendedPoint.Item2].Content = ViewManager.GetRecomendedPoint();
                 }
                 else
                 {
@@ -691,14 +703,93 @@ namespace Chess
         /// <param name="finalPosition">final position</param>
         private void SetLogs(FigureViewModel figure, (int X, int Y) finalPosition)
         {
-            var start = AlhpabetHelper.GetCoordinates(Math.Abs(figure.Position.X-7), Math.Abs(figure.Position.Y ));
-            var end = AlhpabetHelper.GetCoordinates(Math.Abs(finalPosition.X-7), Math.Abs(finalPosition.Y ));
+            var start = AlhpabetHelper.GetCoordinates(Math.Abs(figure.Position.X - 7), Math.Abs(figure.Position.Y));
+            var end = AlhpabetHelper.GetCoordinates(Math.Abs(finalPosition.X - 7), Math.Abs(finalPosition.Y));
             Logs.AppendText(figure.ColorFlag ? "Whites" : "Blacks");
             Logs.AppendText($"\n {++_logsCounter} : {figure.FigureName} : {start} to {end}\n");
         }
 
         #endregion
-        
+
+        #region Horsepath Move Settings
+
+        /// <summary>
+        /// Event: Click for horse task
+        /// </summary>
+        /// <param name="sender">current point</param>
+        /// <param name="e">event args</param>
+        private async void ClickForHorseTask(object sender, EventArgs e)
+        {
+            var p = sender as Button;
+            if (p != null)
+            {
+                (int, int) start = default;
+                foreach (var pb in _viewBoard)
+                {
+                    if (pb.Content != null)
+                    {
+                        start = GetPointbyImage(pb);
+                    }
+                }
+                var end = GetPointbyImage(p);
+                var horsePath = ChessMaster.GetPathForHorseTask(start, end);
+                //front
+                foreach (var vb in _viewBoard)
+                    vb.Click -= ClickForHorseTask;
+                await ShowAsync(horsePath);
+                SetLogsForHorsePath(horsePath);
+                foreach (var vb in _viewBoard)
+                    vb.Click += ClickForHorseTask;
+            }
+        }
+
+        /// <summary>
+        /// Run async Show Path
+        /// </summary>
+        /// <param name="path">path</param>
+        private async Task ShowAsync(List<(int x, int y)> path)
+        {
+            await Task.Run(() =>
+            {
+                for (int i = path.Count - 1; i >= 0; i--)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        _viewBoard[path[i].x, path[i].y].Content = ViewManager.GetChooseHorse(ChessMaster.Turn);
+                    });
+                    Thread.Sleep(800);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ImageVipe();
+                    });
+                }
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    SetAllFiguresImages();
+                    MessageBox.Show($"Move count : {path.Count}", "Info");
+                }
+                );
+            }
+            );
+        }
+
+        /// <summary>
+        /// Method for set logs for horse path
+        /// </summary>
+        /// <param name="path">list of points (path)</param>
+        private void SetLogsForHorsePath(List<(int x, int y)> path)
+        {
+            Logs.Document.Blocks.Clear();
+            for (int i = path.Count - 2; i >= 0; i--)
+            {
+                Logs.AppendText(AlhpabetHelper.GetCoordinates(path[i].x, path[i].y) + "->");
+            }
+            var lastPoint = ChessMaster.GetAllFiguresViewModel()[0].Position;
+            Logs.AppendText(AlhpabetHelper.GetCoordinates(lastPoint.X, lastPoint.Y));
+        }
+
+        #endregion
+
         #region Choose Figure
 
         /// <summary>
@@ -811,10 +902,10 @@ namespace Chess
         /// <param name="colorFlag">color flag</param>
         private void SetChooseImages(bool colorFlag)
         {
-            _chooseButtons[0].Content = new Image().Source = ViewManager.GetChooseQueen(colorFlag);
-            _chooseButtons[1].Content = new Image().Source = ViewManager.GetChooseRook(colorFlag);
-            _chooseButtons[2].Content = new Image().Source = ViewManager.GetChooseHorse(colorFlag);
-            _chooseButtons[3].Content = new Image().Source = ViewManager.GetChooseBishop(colorFlag);
+            _chooseButtons[0].Content = ViewManager.GetChooseQueen(colorFlag);
+            _chooseButtons[1].Content = ViewManager.GetChooseRook(colorFlag);
+            _chooseButtons[2].Content = ViewManager.GetChooseHorse(colorFlag);
+            _chooseButtons[3].Content = ViewManager.GetChooseBishop(colorFlag);
         }
 
         #endregion

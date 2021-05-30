@@ -325,7 +325,9 @@ namespace Chess.Logic.Game_Mangement
 
         public void SetModeHorsePath()
         {
-
+            this.GameType = GameType.Horsepath;
+            SetChessboardByComputerMode(true);
+            Turn = _firstPlayerColor == ColorEnum.White;
         }
 
         #endregion

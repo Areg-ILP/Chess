@@ -36,19 +36,17 @@
                                 <Button x:Name="RookChooseButton" HorizontalAlignment="Left" Height="66" Margin="122,40,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
                                 <Button x:Name="BishopChooseButton" HorizontalAlignment="Left" Height="66" Margin="33,125,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
                                 <Label Content="Choose Figure" HorizontalAlignment="Center" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" Width="98" FontSize="13"/>
-
                             </Grid>
                         </Border>
                     </Grid>
                 </Border>
-
             </Grid>
         </Border>
 
         <!--Tabs Control-->
         <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="613" Margin="690,52,0,0" VerticalAlignment="Top" Width="231">
             <TabControl Margin="0 0 0 0">
-                <TabItem Header="Account">
+                <TabItem Header="Account" FontSize="13">
                     <Grid  Background="NavajoWhite" >
 
                         <!--SignIn Box-->
@@ -113,6 +111,7 @@
                 </TabItem>
                 <TabItem x:Name="GameSettingsTabItem" Header="Game settings" IsEnabled="False">
                     <Grid  Background="NavajoWhite">
+                        
                         <!--Create Box-->
                         <Border x:Name="CreationBorder" IsEnabled="False" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="157" Margin="0,121,0,0" VerticalAlignment="Top" Width="196">
                             <Grid>
@@ -178,10 +177,9 @@
             <MenuItem x:Name="SaveBtn" Header="Save"></MenuItem>
             <MenuItem x:Name="HelpBtn" Header="Help"></MenuItem>
             <MenuItem Header="Mode">
-                <MenuItem x:Name="EndGameModeBtn" Icon="Images\EndGame.png" Header="Endgame"/>
+                <MenuItem x:Name="EndGameModeBtn" Header="Endgame"/>
                 <MenuItem x:Name="HorsepathModeBtn" Header="Horsepath"/>
                 <MenuItem x:Name="PvpModeBtn" Header="PVP">
-                    <!--<Image Source="Images\BlackHorse.png"  />-->
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="About">
