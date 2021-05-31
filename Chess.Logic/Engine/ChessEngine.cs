@@ -50,5 +50,15 @@ namespace Chess.Logic.Engine
         {
             return _horseTaskSolver.GetShortestPath(start,end,chessBoard);
         }
+
+        /// <summary>
+        /// Change engine color
+        /// </summary>
+        /// <param name="color"></param>
+        public void ChangeEngineColor(ColorEnum color)
+        {
+            _brain.ChangeBrainColor(color);
+            _horseTaskSolver.ChangeSolverColor(color);
+        }
     }
 }

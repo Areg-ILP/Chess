@@ -185,6 +185,7 @@ namespace Chess
                     CreationBorder.IsEnabled = true;
                     break;
             }
+            _logsCounter = 0;
             Logs.Document.Blocks.Clear();
             SetAllFiguresImages();
         }
@@ -224,6 +225,7 @@ namespace Chess
             ChooseFigureBox.Items.Add("Pawn");
         }
 
+
         private void HorsepathModeClick(object sender, EventArgs e)
         {
             ChessMaster.SetModeHorsePath();
@@ -243,6 +245,13 @@ namespace Chess
         {
             ChessMaster.SetModePVP();
             OnChangeMode();
+
+            //mb
+            SetMoveEventsFlag(true);
+            foreach (var vb in _viewBoard)
+            {
+                vb.Click -= ClickForHorseTask;
+            }
         }
 
         private void OnChangeMode()
@@ -341,8 +350,11 @@ namespace Chess
             UserLoseCountLabel.Content = user.LoseCount;
             UserDrawCountLabel.Content = user.DrawCount;
             UserCreationDateLabel.Content = user.CreationDate;
-            WinRateBar.Value = user.WinCount * 100 / user.PartyCount;
-            DrawRateBar.Value = user.DrawCount * 100 / user.PartyCount;
+            if (user.PartyCount != 0)
+            {
+                WinRateBar.Value = user.WinCount * 100 / user.PartyCount;
+                DrawRateBar.Value = user.DrawCount * 100 / user.PartyCount;
+            }
         }
 
         #endregion
@@ -583,6 +595,7 @@ namespace Chess
         private void GameDebuff()
         {
             SetMoveEventsFlag(false);
+            _logsCounter = 0;
             Logs.Document.Blocks.Clear();
             WhiteColorPickBox.IsChecked = false;
             BlackColorPickBox.IsChecked = false;
@@ -779,6 +792,7 @@ namespace Chess
         /// <param name="path">list of points (path)</param>
         private void SetLogsForHorsePath(List<(int x, int y)> path)
         {
+            _logsCounter = 0;
             Logs.Document.Blocks.Clear();
             for (int i = path.Count - 2; i >= 0; i--)
             {

@@ -8,8 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\BlackKing.png" />
-    <None Remove="Images\WhiteKing.png" />
+    <None Remove="BlackBishop.png" />
+    <None Remove="BlackHorse.png" />
+    <None Remove="BlackKing.png" />
+    <None Remove="BlackPawn.png" />
+    <None Remove="BlackQueen.png" />
+    <None Remove="BlackRook.png" />
+    <None Remove="EndGame.png" />
+    <None Remove="GrayRecomend.png" />
+    <None Remove="PVP.png" />
+    <None Remove="WhiteBishop.png" />
+    <None Remove="WhiteHorse.png" />
+    <None Remove="WhiteKing.png" />
+    <None Remove="WhitePawn.png" />
+    <None Remove="WhiteQueen.png" />
+    <None Remove="WhiteRook.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,12 +30,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\BlackKing.png">
+    <Resource Include="Img\EndGame.png" />
+    <Resource Include="Img\Github.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\WhiteKing.png">
+    <Resource Include="Img\BlackBishop.png" />
+    <Resource Include="Img\BlackHorse.png" />
+    <Resource Include="Img\BlackKing.png" />
+    <Resource Include="Img\BlackPawn.png" />
+    <Resource Include="Img\BlackQueen.png" />
+    <Resource Include="Img\BlackRook.png" />
+    <Resource Include="Img\GrayRecomend.png" />
+    <Resource Include="Img\WhiteBishop.png" />
+    <Resource Include="Img\WhiteHorse.png" />
+    <Resource Include="Img\WhiteKing.png" />
+    <Resource Include="Img\WhitePawn.png" />
+    <Resource Include="Img\WhiteQueen.png" />
+    <Resource Include="Img\WhiteRook.png" />
+    <Resource Include="Img\Linkedin.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Img\PVP.png" />
   </ItemGroup>
 
 </Project>

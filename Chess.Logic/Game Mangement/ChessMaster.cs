@@ -256,6 +256,7 @@ namespace Chess.Logic.Game_Mangement
         {
             _firstPlayerColor = colorFlag ? ColorEnum.White : ColorEnum.Black;
             _secondPlayerColor = colorFlag ? ColorEnum.Black : ColorEnum.White;
+            _chessEngine?.ChangeEngineColor(_secondPlayerColor);
         }
 
         /// <summary>

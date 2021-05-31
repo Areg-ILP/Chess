@@ -287,5 +287,14 @@ namespace Chess.Logic.Engine
                     minIdx = i;
             return minIdx;
         }
+
+        /// <summary>
+        /// Change brain color figures
+        /// </summary>
+        /// <param name="color">current color</param>
+        public void ChangeBrainColor(ColorEnum color)
+        {
+            _brainColor = color;
+        }
     }
 }

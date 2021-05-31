@@ -5,24 +5,27 @@ using System.Windows.Media.Imaging;
 
 namespace Chess
 {
+    /// <summary>
+    /// Class for view managment 
+    /// </summary>
     public static class ViewManager
     {
         /// <summary>
         /// all path of images in project
         /// </summary>
-        private const string _imagePathBlackKing = @"C:\Users\Admin\source\repos\Chess\Chess\Images\BlackKing.png";
-        private const string _imagePathBlackQueen = @"C:\Users\Admin\source\repos\Chess\Chess\Images\BlackQueen.png";
-        private const string _imagePathBlackRook = @"C:\Users\Admin\source\repos\Chess\Chess\Images\BlackRook.png";
-        private const string _imagePathBlackBishop = @"C:\Users\Admin\source\repos\Chess\Chess\Images\BlackBishop.png";
-        private const string _imagePathBlackHorse = @"C:\Users\Admin\source\repos\Chess\Chess\Images\BlackHorse.png";
-        private const string _imagePathBlackPawn = @"C:\Users\Admin\source\repos\Chess\Chess\Images\BlackPawn.png";
-        private const string _imagePathWhiteKing = @"C:\Users\Admin\source\repos\Chess\Chess\Images\WhiteKing.png";
-        private const string _imagePathWhiteQueen = @"C:\Users\Admin\source\repos\Chess\Chess\Images\WhiteQueen.png";
-        private const string _imagePathWhiteRook = @"C:\Users\Admin\source\repos\Chess\Chess\Images\WhiteRook.png";
-        private const string _imagePathWhiteHorse = @"C:\Users\Admin\source\repos\Chess\Chess\Images\WhiteHorse.png";
-        private const string _imagePathWhiteBishop = @"C:\Users\Admin\source\repos\Chess\Chess\Images\WhiteBishop.png";
-        private const string _imagePathWhitePawn = @"C:\Users\Admin\source\repos\Chess\Chess\Images\WhitePawn.png";
-        private const string _imagePathGrayRecomend = @"C:\Users\Admin\source\repos\Chess\Chess\Images\GrayRecomend.png";
+        private const string _imagePathBlackKing = @"Img\BlackKing.png";
+        private const string _imagePathBlackQueen = @"Img\BlackQueen.png";
+        private const string _imagePathBlackRook = @"Img\BlackRook.png";
+        private const string _imagePathBlackBishop = @"Img\BlackBishop.png";
+        private const string _imagePathBlackHorse = @"Img\BlackHorse.png";
+        private const string _imagePathBlackPawn = @"Img\BlackPawn.png";
+        private const string _imagePathWhiteKing = @"Img\WhiteKing.png";
+        private const string _imagePathWhiteQueen = @"Img\WhiteQueen.png";
+        private const string _imagePathWhiteRook = @"Img\WhiteRook.png";
+        private const string _imagePathWhiteHorse = @"Img\WhiteHorse.png";
+        private const string _imagePathWhiteBishop = @"Img\WhiteBishop.png";
+        private const string _imagePathWhitePawn = @"Img\WhitePawn.png";
+        private const string _imagePathGrayRecomend = @"Img\GrayRecomend.png";
 
         /// <summary>
         /// Method to Get image by figure
@@ -35,28 +38,28 @@ namespace Chess
             {
                 case "King":
                     if (!figure.ColorFlag)
-                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackKing)) };
-                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteKing)) };
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackKing, UriKind.Relative)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteKing, UriKind.Relative)) };
                 case "Queen":
                     if (!figure.ColorFlag)
-                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackQueen)) };
-                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteQueen)) };
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackQueen, UriKind.Relative)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteQueen, UriKind.Relative)) };
                 case "Rook":
                     if (!figure.ColorFlag)
-                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackRook)) };
-                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteRook)) };
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackRook, UriKind.Relative)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteRook, UriKind.Relative)) };
                 case "Horse":
                     if (!figure.ColorFlag)
-                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackHorse)) };
-                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteHorse)) };
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackHorse, UriKind.Relative)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteHorse, UriKind.Relative)) };
                 case "Bishop":
                     if (!figure.ColorFlag)
-                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackBishop)) };
-                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteBishop)) };
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackBishop, UriKind.Relative)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteBishop, UriKind.Relative)) };
                 case "Pawn":
                     if (!figure.ColorFlag)
-                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackPawn)) };
-                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhitePawn)) };
+                        return new Image() { Source = new BitmapImage(new Uri(_imagePathBlackPawn, UriKind.Relative)) };
+                    return new Image() { Source = new BitmapImage(new Uri(_imagePathWhitePawn, UriKind.Relative)) };
                 default:
                     throw new Exception("Image not Found");
             }
@@ -68,29 +71,29 @@ namespace Chess
         /// <returns>image recomendation</returns>
         public static Image GetRecomendedPoint()
         {
-            return new Image() { Source = new BitmapImage(new Uri(_imagePathGrayRecomend)) };
+            return new Image() { Source = new BitmapImage(new Uri(_imagePathGrayRecomend, UriKind.Relative)) };
         }
 
         public static Image GetChooseQueen(bool colorFlag)
         {
-            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteQueen)) } :
-                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackQueen)) };
+            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteQueen, UriKind.Relative)) } :
+                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackQueen, UriKind.Relative)) };
         }
         public static Image GetChooseRook(bool colorFlag)
         {
-            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteRook)) } :
-                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackRook)) };
+            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteRook, UriKind.Relative)) } :
+                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackRook, UriKind.Relative)) };
         }
         public static Image GetChooseBishop(bool colorFlag)
         {
-            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteBishop)) } :
-                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackBishop)) };
+            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteBishop, UriKind.Relative)) } :
+                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackBishop, UriKind.Relative)) };
         }
 
         public static Image GetChooseHorse(bool colorFlag)
         {
-            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteHorse)) } :
-                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackHorse)) };
+            return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteHorse, UriKind.Relative)) } :
+                new Image() { Source = new BitmapImage(new Uri(_imagePathBlackHorse, UriKind.Relative)) };
         }
     }
 }

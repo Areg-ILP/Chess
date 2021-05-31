@@ -58,7 +58,7 @@
                                 <Label Content="Password" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="14"/>
                                 <PasswordBox x:Name="PassBox" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Width="174" Height="25" FontSize="14"/>
                                 <Button x:Name="LogInButton" Background="Goldenrod" Content="Log in" HorizontalAlignment="Center" Margin="0,138,0,0" VerticalAlignment="Top" Width="76" Height="26" Click="LogInButton_Click"/>
-                                <Button x:Name= "ChangeViewRegistration" BorderBrush="Transparent" Background="NavajoWhite" HorizontalAlignment="Center" Margin="0,169,0,0" VerticalAlignment="Top" Width="142" Click="ChangeViewRegistration_Click">
+                                <Button x:Name= "ChangeViewRegistration" BorderBrush="Transparent" Background="NavajoWhite" HorizontalAlignment="Center" Margin="0,169,0,0" VerticalAlignment="Top" Width="147" Click="ChangeViewRegistration_Click">
                                     <TextBlock TextDecorations="Underline">If you dont have account</TextBlock>
                                 </Button>
                             </Grid>
@@ -86,7 +86,7 @@
                                 <RichTextBox x:Name="LastMatches" Background="FloralWhite" IsReadOnly="True" HorizontalAlignment="Center" Height="159" Margin="0,390,0,0" VerticalAlignment="Top" Width="172"/>
 
                                 <!--User Info-->
-                                <Label x:Name="UserNameLabel" Content="Name" HorizontalAlignment="Center" Height="35" Margin="0,10,0,0" VerticalAlignment="Top" Width="64" FontSize="19"/>
+                                <Label x:Name="UserNameLabel"   Content="Name" HorizontalAlignment="Center" Height="35" Margin="0,7,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="172" FontSize="19"/>
                                 <Label x:Name="UserIdLabel" Content="id" HorizontalAlignment="Left" Height="30" Margin="48,42,0,0" VerticalAlignment="Top" Width="30" FontSize="15"/>
                                 <Label Content="ID - " HorizontalAlignment="Left" Height="30" Margin="10,42,0,0" VerticalAlignment="Top" Width="38" FontSize="15"/>
                                 <Label x:Name="UserPartyCountLabel" Content="party" HorizontalAlignment="Center" Height="30" Margin="0,72,0,0" VerticalAlignment="Top" Width="56" FontSize="15"/>
@@ -111,7 +111,7 @@
                 </TabItem>
                 <TabItem x:Name="GameSettingsTabItem" Header="Game settings" IsEnabled="False">
                     <Grid  Background="NavajoWhite">
-                        
+
                         <!--Create Box-->
                         <Border x:Name="CreationBorder" IsEnabled="False" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="157" Margin="0,121,0,0" VerticalAlignment="Top" Width="196">
                             <Grid>
@@ -177,16 +177,34 @@
             <MenuItem x:Name="SaveBtn" Header="Save"></MenuItem>
             <MenuItem x:Name="HelpBtn" Header="Help"></MenuItem>
             <MenuItem Header="Mode">
-                <MenuItem x:Name="EndGameModeBtn" Header="Endgame"/>
-                <MenuItem x:Name="HorsepathModeBtn" Header="Horsepath"/>
+                <MenuItem x:Name="EndGameModeBtn" Header="Endgame">
+                    <MenuItem.Icon>
+                        <Image Source = "/Img/EndGame.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="HorsepathModeBtn" Header="Horsepath">
+                    <MenuItem.Icon>
+                        <Image Source = "/Img/BlackHorse.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem x:Name="PvpModeBtn" Header="PVP">
+                    <MenuItem.Icon>
+                        <Image Source = "/Img/PVP.png"></Image>
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="About">
-                <MenuItem x:Name="LinkedInButton" Header="LinkedIn"></MenuItem>
-                <MenuItem x:Name="GitHubButton" Header="GitHub"></MenuItem>
+                <MenuItem x:Name="LinkedInButton" Header="LinkedIn">
+                    <MenuItem.Icon>
+                        <Image Source = "/Img/Linkedin.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="GitHubButton" Header="GitHub">
+                    <MenuItem.Icon>
+                        <Image Source = "/Img/Github.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
-
     </Grid>
 </Window>

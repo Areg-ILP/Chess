@@ -106,5 +106,14 @@ namespace Chess.Logic.Engine
             return horsePossibleMove == targetPossibleMove;
         }
 
+        /// <summary>
+        /// Change brain color figures
+        /// </summary>
+        /// <param name="color">current color</param>
+        public void ChangeSolverColor(ColorEnum color)
+        {
+            _color = color;
+        }
+
     }
 }
