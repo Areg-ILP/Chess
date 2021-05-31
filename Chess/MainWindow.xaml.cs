@@ -161,11 +161,7 @@ namespace Chess
                 else CreationBorder.IsEnabled = false;
             }
 
-            foreach (var vb in _viewBoard)
-            {
-                vb.Click += ImageClick;
-                vb.Click += ClickToChange;
-            }
+            SetMoveEventsFlag(true);
             PlayBtn.IsEnabled = false;
 
             MessageBox.Show("Good luck , have fun !", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -225,17 +221,10 @@ namespace Chess
             ChooseFigureBox.Items.Add("Pawn");
         }
 
-
         private void HorsepathModeClick(object sender, EventArgs e)
         {
             ChessMaster.SetModeHorsePath();
             OnChangeMode();
-
-            SetMoveEventsFlag(false);
-            foreach (var vb in _viewBoard)
-            {
-                vb.Click += ClickForHorseTask;
-            }
 
             ChooseFigureBox.Items.Clear();
             ChooseFigureBox.Items.Add("Horse");
@@ -245,13 +234,6 @@ namespace Chess
         {
             ChessMaster.SetModePVP();
             OnChangeMode();
-
-            //mb
-            SetMoveEventsFlag(true);
-            foreach (var vb in _viewBoard)
-            {
-                vb.Click -= ClickForHorseTask;
-            }
         }
 
         private void OnChangeMode()
@@ -529,7 +511,27 @@ namespace Chess
         private List<(int, int)> _currentFigureRecomendations;
 
         /// <summary>
-        /// Event: Picturebox click (s,s)
+        /// Main click function for all cells
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CellClick(object sender,EventArgs e)
+        {
+            switch(ChessMaster.GameType)
+            {
+                case GameType.Horsepath:
+                    ClickForHorseTask(sender, e);
+                    break;
+                case GameType.PVP:
+                case GameType.Endgame:
+                    ImageClick(sender, e);
+                    ClickToChange(sender, e);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Event: Image click (s,s)
         /// </summary>
         /// <param name="sender">all cells in board</param>
         /// <param name="e">event args</param>
@@ -575,7 +577,10 @@ namespace Chess
                         _isClicked = false;
                         SetAllFiguresImages();
                         if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag))
+                        {
                             GameDebuff();
+                            SetMoveEventsFlag(false);
+                        }
                         break;
                     }
                 }
@@ -594,7 +599,6 @@ namespace Chess
         /// </summary>
         private void GameDebuff()
         {
-            SetMoveEventsFlag(false);
             _logsCounter = 0;
             Logs.Document.Blocks.Clear();
             WhiteColorPickBox.IsChecked = false;
@@ -611,18 +615,8 @@ namespace Chess
         /// <param name="add">add flag</param>
         private void SetMoveEventsFlag(bool add)
         {
-            if (add)
-                foreach (var vb in _viewBoard)
-                {
-                    vb.Click += ImageClick;
-                    vb.Click += ClickToChange;
-                }
-            else
-                foreach (var vb in _viewBoard)
-                {
-                    vb.Click -= ImageClick;
-                    vb.Click -= ClickToChange;
-                }
+            if (add) foreach (var vb in _viewBoard) vb.Click += CellClick;
+            else foreach (var vb in _viewBoard) vb.Click -= CellClick;
         }
 
         /// <summary>
@@ -747,12 +741,10 @@ namespace Chess
                 var end = GetPointbyImage(p);
                 var horsePath = ChessMaster.GetPathForHorseTask(start, end);
                 //front
-                foreach (var vb in _viewBoard)
-                    vb.Click -= ClickForHorseTask;
+                SetMoveEventsFlag(false);
                 await ShowAsync(horsePath);
                 SetLogsForHorsePath(horsePath);
-                foreach (var vb in _viewBoard)
-                    vb.Click += ClickForHorseTask;
+                SetMoveEventsFlag(true);
             }
         }
 
@@ -860,9 +852,15 @@ namespace Chess
             ImageVipe();
             SetAllFiguresImages();
             FigureChooseBorder.Visibility = Visibility.Hidden;
-            SetMoveEventsFlag(true);
+
             if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag))
+            {
                 GameDebuff();
+            }
+            else
+            {
+                SetMoveEventsFlag(true);
+            }
         }
 
         /// <summary>

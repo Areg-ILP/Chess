@@ -27,17 +27,10 @@
                 <Label Content="F" HorizontalAlignment="Left" Margin="410,560,0,0" VerticalAlignment="Top" FontSize="18"/>
                 <Label Content="G" HorizontalAlignment="Left" Margin="475,560,0,0" VerticalAlignment="Top" FontSize="18"/>
                 <Label Content="H" HorizontalAlignment="Left" Margin="542,560,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <!--Board-->
                 <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="530" VerticalAlignment="Top" Width="530" Margin="0,28,0,0">
                     <Grid x:Name="Board">
-                        <Border x:Name="FigureChooseBorder" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="214" Margin="0,198,0,0" VerticalAlignment="Top" Width="220" Background="Tan">
-                            <Grid>
-                                <Button x:Name="QueenChooseButton" HorizontalAlignment="Left" Height="66" Margin="33,40,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
-                                <Button x:Name="HorseChooseButton" HorizontalAlignment="Left" Height="66" Margin="122,125,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
-                                <Button x:Name="RookChooseButton" HorizontalAlignment="Left" Height="66" Margin="122,40,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
-                                <Button x:Name="BishopChooseButton" HorizontalAlignment="Left" Height="66" Margin="33,125,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
-                                <Label Content="Choose Figure" HorizontalAlignment="Center" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" Width="98" FontSize="13"/>
-                            </Grid>
-                        </Border>
+
                     </Grid>
                 </Border>
             </Grid>
@@ -158,8 +151,8 @@
                         <!--Color Pick-->
                         <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="86" Margin="0,21,0,0" VerticalAlignment="Top" Width="196">
                             <Grid>
-                                <Image Source = "Images\WhiteKing.png" HorizontalAlignment="Left" Height="55" Margin="28,3,0,0" VerticalAlignment="Top" Width="55"/>
-                                <Image Source = "Images\BlackKing.png" HorizontalAlignment="Left" Height="55" Margin="112,3,0,0" VerticalAlignment="Top" Width="55"/>
+                                <Image Source = "Img\WhiteKing.png" HorizontalAlignment="Left" Height="55" Margin="28,3,0,0" VerticalAlignment="Top" Width="55"/>
+                                <Image Source = "Img\BlackKing.png" HorizontalAlignment="Left" Height="55" Margin="112,3,0,0" VerticalAlignment="Top" Width="55"/>
                                 <CheckBox x:Name="WhiteColorPickBox" HorizontalAlignment="Left" Margin="47,59,0,0" VerticalAlignment="Top" Checked="WhiteColorPickBox_Checked" />
                                 <CheckBox x:Name="BlackColorPickBox" HorizontalAlignment="Left" Margin="131,59,0,0" VerticalAlignment="Top" Checked="BlackColorPickBox_Checked"/>
                             </Grid>
@@ -206,5 +199,19 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
+
+        <!--Choose figure-->
+        <Grid>
+            <Border x:Name="FigureChooseBorder" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="214" Margin="242,0,0,0" VerticalAlignment="Center" Width="220" Background="Tan">
+                <Grid>
+                    <Button x:Name="QueenChooseButton" HorizontalAlignment="Left" Height="66" Margin="33,40,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
+                    <Button x:Name="HorseChooseButton" HorizontalAlignment="Left" Height="66" Margin="122,125,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
+                    <Button x:Name="RookChooseButton" HorizontalAlignment="Left" Height="66" Margin="122,40,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
+                    <Button x:Name="BishopChooseButton" HorizontalAlignment="Left" Height="66" Margin="33,125,0,0" VerticalAlignment="Top" Width="66" Background="Tan"/>
+                    <Label Content="Choose Figure" HorizontalAlignment="Center" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" Width="100" FontSize="15"/>
+                </Grid>
+            </Border>
+        </Grid>
+
     </Grid>
 </Window>
