@@ -1,7 +1,7 @@
 ﻿using Chess.Data.Models;
 using System.Collections.Generic;
 
-namespace Chess.Data.Services.Interfaces
+namespace Chess.Data.Services
 {
     public interface IBaseService<T> where T : Entity
     {

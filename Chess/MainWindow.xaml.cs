@@ -135,12 +135,18 @@ namespace Chess
 
         #region Events Settings
 
+        /// <summary>
+        /// Set events before login
+        /// </summary>
         private void SetEventsBeforeLogin()
         {
             //LinkedInButton.Click += OpenLinkedInPage;
             //GitHubButton.Click += OpenGitHubPage;
         }
 
+        /// <summary>
+        /// Set events after login
+        /// </summary>
         private void SetEventsAfterLogin()
         {
             PlayBtn.Click += PlayClick;
@@ -153,6 +159,11 @@ namespace Chess
             CreateBtn.Click += CreateBtnClick;
         }
 
+        /// <summary>
+        /// Event: play button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PlayClick(object sender, EventArgs e)
         {
             if (ChessMaster.GameType == GameType.Endgame)
@@ -167,6 +178,11 @@ namespace Chess
             MessageBox.Show("Good luck , have fun !", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        /// <summary>
+        /// Event: restart button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RestartClick(object sender, EventArgs e)
         {
             ImageVipe();
@@ -186,6 +202,11 @@ namespace Chess
             SetAllFiguresImages();
         }
 
+        /// <summary>
+        /// Event: help button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HelpClick(object sender, EventArgs e)
         {
             switch (ChessMaster.GameType)
@@ -202,11 +223,19 @@ namespace Chess
             }
         }
 
+        /// <summary>
+        /// Event: Save button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveClick(object sender, EventArgs e)
         {
             //mb
         }
 
+        /// <summary>
+        /// Event: endgame mode button click
+        /// </summary>
         private void EndGameModeClick(object sender, EventArgs e)
         {
             ChessMaster.SetModeEndgame();
@@ -221,6 +250,9 @@ namespace Chess
             ChooseFigureBox.Items.Add("Pawn");
         }
 
+        /// <summary>
+        /// Event: horsepath mode button clcik
+        /// </summary>
         private void HorsepathModeClick(object sender, EventArgs e)
         {
             ChessMaster.SetModeHorsePath();
@@ -230,12 +262,18 @@ namespace Chess
             ChooseFigureBox.Items.Add("Horse");
         }
 
+        /// <summary>
+        /// Event: pvpmode button click
+        /// </summary>
         private void PVPModeClick(object sender, EventArgs e)
         {
             ChessMaster.SetModePVP();
             OnChangeMode();
         }
 
+        /// <summary>
+        /// Function for change mode modifications
+        /// </summary>
         private void OnChangeMode()
         {
             GameDebuff();
@@ -247,8 +285,14 @@ namespace Chess
 
         #region Login and Registration
 
+        /// <summary>
+        /// Current user
+        /// </summary>
         private static UserViewModel CurrentUser;
 
+        /// <summary>
+        /// Event: login button click
+        /// </summary>
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
             if (LoginBox.Text == string.Empty ||
@@ -272,6 +316,9 @@ namespace Chess
             }
         }
 
+        /// <summary>
+        /// Event: registration button click
+        /// </summary>
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)
         {
             if (RegisterLoginBox.Text == string.Empty ||
@@ -302,12 +349,18 @@ namespace Chess
             }
         }
 
+        /// <summary>
+        /// Event: Change view login button click
+        /// </summary>
         private void ChangeViewLogin_Click(object sender, RoutedEventArgs e)
         {
             RegistrationBox.Visibility = Visibility.Hidden;
             SignInBox.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Event: Change view registration button click
+        /// </summary>
         private void ChangeViewRegistration_Click(object sender, RoutedEventArgs e)
         {
             SignInBox.Visibility = Visibility.Hidden;
@@ -315,6 +368,9 @@ namespace Chess
             RegistrationBox.Margin = new Thickness(9, 175, 9, 160);
         }
 
+        /// <summary>
+        /// Method to set progfile front end settings
+        /// </summary>
         private void SetProfileFrontEndSettings()
         {
             SignInBox.Visibility = Visibility.Hidden;
@@ -323,6 +379,10 @@ namespace Chess
             GameSettingsTabItem.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Method tu set personal area elemnts and statistics
+        /// </summary>
+        /// <param name="user">current user</param>
         private void SetPersonalAreaElements(UserViewModel user)
         {
             UserNameLabel.Content = user.Name;

@@ -74,6 +74,8 @@ namespace Chess
             return new Image() { Source = new BitmapImage(new Uri(_imagePathGrayRecomend, UriKind.Relative)) };
         }
 
+        #region Method to choosing figure (pawn template)
+
         public static Image GetChooseQueen(bool colorFlag)
         {
             return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteQueen, UriKind.Relative)) } :
@@ -95,5 +97,7 @@ namespace Chess
             return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteHorse, UriKind.Relative)) } :
                 new Image() { Source = new BitmapImage(new Uri(_imagePathBlackHorse, UriKind.Relative)) };
         }
+
+        #endregion
     }
 }

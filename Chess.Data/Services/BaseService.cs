@@ -1,14 +1,13 @@
 ﻿using Chess.Data.Models;
-using Chess.Data.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace Chess.Data.Services.Implementations
+namespace Chess.Data.Services
 {
-    public class BaseService<T> : IBaseService<T> where T : Entity
+    internal class BaseService<T> : IBaseService<T> where T : Entity
     {
         private const string _dataPath = @"C:\Users\Admin\source\repos\Chess\Chess.Data\bin\Debug\net5.0\UserData.json";
 

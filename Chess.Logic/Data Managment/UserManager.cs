@@ -1,6 +1,6 @@
-﻿using Chess.Data.Models;
-using Chess.Data.Services.Implementations;
-using Chess.Data.Services.Interfaces;
+﻿using Chess.Data;
+using Chess.Data.Models;
+using Chess.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace Chess.Logic.Data_Managment
 
         static UserManager()
         {
-            _userService = new BaseService<User>();
+            _userService = ServiceHelper.GetService<User>();
         }
 
         public static UserViewModel SignIn(string login, string password)
