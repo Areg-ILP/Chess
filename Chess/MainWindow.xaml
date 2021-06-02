@@ -213,5 +213,19 @@
             </Border>
         </Grid>
 
+        <!--Searching player-->
+        <Grid RenderTransformOrigin="0.52,0.512">
+            <Border x:Name="ChoosePlayerWindow" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="161" Margin="188,0,0,0" VerticalAlignment="Center" Width="361" Background="Goldenrod">
+                <Grid>
+                    <Button x:Name="p2" HorizontalAlignment="Left" Height="56" Margin="77,63,0,0" VerticalAlignment="Top" Width="56" Background="Tan"/>
+                    <Button x:Name="p3" HorizontalAlignment="Center" Height="66" VerticalAlignment="Top" Width="66" Background="Tan" Margin="0,58,0,0"/>
+                    <Button x:Name="p4" HorizontalAlignment="Left" Height="56" Margin="229,63,0,0" VerticalAlignment="Top" Width="56" Background="Tan"/>
+                    <Button x:Name="p5" HorizontalAlignment="Left" Height="42" Margin="299,70,0,0" VerticalAlignment="Top" Width="41" Background="Tan"/>
+                    <Button x:Name="p1" HorizontalAlignment="Left" Height="42" Margin="21,70,0,0" VerticalAlignment="Top" Width="41" Background="Tan"/>
+                    <Label Content="Searching player" HorizontalAlignment="Center" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" Width="126" FontSize="15"/>
+                </Grid>
+            </Border>
+        </Grid>
+
     </Grid>
 </Window>

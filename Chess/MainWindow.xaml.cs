@@ -171,11 +171,13 @@ namespace Chess
                 if (!ChessMaster.IsStartableGame()) return;
                 else CreationBorder.IsEnabled = false;
             }
+            else
+            {
+                SearchingAnimation();
+            }
 
             SetMoveEventsFlag(true);
             PlayBtn.IsEnabled = false;
-
-            MessageBox.Show("Good luck , have fun !", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
@@ -288,7 +290,7 @@ namespace Chess
         /// <summary>
         /// Current user
         /// </summary>
-        private static UserViewModel CurrentUser;
+        private static UserViewModel _currentUser;
 
         /// <summary>
         /// Event: login button click
@@ -304,9 +306,9 @@ namespace Chess
 
             try
             {
-                CurrentUser = UserManager.SignIn(LoginBox.Text, PassBox.Password);
+                _currentUser = UserManager.SignIn(LoginBox.Text, PassBox.Password);
                 SetProfileFrontEndSettings();
-                SetPersonalAreaElements(CurrentUser);
+                SetPersonalAreaElements(_currentUser);
                 SetEventsAfterLogin();
             }
             catch (Exception ex)
@@ -337,9 +339,9 @@ namespace Chess
 
             try
             {
-                CurrentUser = UserManager.Registration(RegisterLoginBox.Text, RegisterFirstPassBox.Password);
+                _currentUser = UserManager.Registration(RegisterLoginBox.Text, RegisterFirstPassBox.Password);
                 SetProfileFrontEndSettings();
-                SetPersonalAreaElements(CurrentUser);
+                SetPersonalAreaElements(_currentUser);
                 SetEventsAfterLogin();
             }
             catch (Exception ex)
@@ -348,6 +350,18 @@ namespace Chess
                 return;
             }
         }
+
+        #region Party
+
+        private PartyViewModel _currentParty;
+
+        private void SetPartySettings()
+        {
+
+        }
+
+        #endregion
+
 
         /// <summary>
         /// Event: Change view login button click
@@ -575,9 +589,9 @@ namespace Chess
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CellClick(object sender,EventArgs e)
+        private void CellClick(object sender, EventArgs e)
         {
-            switch(ChessMaster.GameType)
+            switch (ChessMaster.GameType)
             {
                 case GameType.Horsepath:
                     ClickForHorseTask(sender, e);
@@ -982,5 +996,43 @@ namespace Chess
 
         #endregion
 
+        #region Searching Player
+
+        private Button[] _searchingButtons;
+
+        private async void SearchingAnimation()
+        {
+            await Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ChoosePlayerWindow.Visibility = Visibility.Visible;
+                    _searchingButtons = new Button[5]
+                    {
+                p1,p2,p3,p4,p5
+                    };
+
+                    for (int i = 0; i < _searchingButtons.Length; i++)
+                    {
+                        _searchingButtons[i].Content = ViewManager.GetPlayerIcon();
+                    }
+                });
+                for (int i = 0; i < 6; i++)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        if (i == 4)
+                            i = 0;
+                        _searchingButtons[i + 1].Content = _searchingButtons[i].Content;
+                        _searchingButtons[i].Content = ViewManager.GetPlayerIcon();
+                    });
+                    Thread.Sleep(100);
+                }
+            }
+            );
+
+        }
+
+        #endregion
     }
 }

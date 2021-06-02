@@ -74,7 +74,7 @@ namespace Chess
             return new Image() { Source = new BitmapImage(new Uri(_imagePathGrayRecomend, UriKind.Relative)) };
         }
 
-        #region Method to choosing figure (pawn template)
+        #region Methods to choosing figure (pawn template)
 
         public static Image GetChooseQueen(bool colorFlag)
         {
@@ -96,6 +96,27 @@ namespace Chess
         {
             return colorFlag ? new Image() { Source = new BitmapImage(new Uri(_imagePathWhiteHorse, UriKind.Relative)) } :
                 new Image() { Source = new BitmapImage(new Uri(_imagePathBlackHorse, UriKind.Relative)) };
+        }
+
+        #endregion
+
+        #region Methods to get player icons
+
+        private static int _currentplayer;
+        private static string[] _players = new string[6]
+        {
+            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a1.png",
+            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a2.png",
+            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a3.png",
+            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a4.png",
+            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a5.png",
+            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a6.png",
+        };
+
+        public static Image GetPlayerIcon()
+        {
+            if (_currentplayer == _players.Length - 1) _currentplayer = 0;
+            return new Image() { Source = new BitmapImage(new Uri(_players[_currentplayer++])) };
         }
 
         #endregion
