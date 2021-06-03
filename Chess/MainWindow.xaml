@@ -5,30 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="Chess" WindowStartupLocation="CenterScreen" Height="722" Width="960" Background="Tan" ResizeMode="CanMinimize">
+        Title="Chess" WindowStartupLocation="CenterScreen" Height="764" Width="960" Background="Tan" ResizeMode="CanMinimize">
     <Grid>
 
         <!--Board-->
-        <Border Background="NavajoWhite" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="613" Margin="23,52,0,0" VerticalAlignment="Top" Width="645">
+        <Border Background="NavajoWhite" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="646" Margin="23,52,0,0" VerticalAlignment="Top" Width="645">
             <Grid>
-                <Label Content="8" HorizontalAlignment="Left" Margin="32,45,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="7" HorizontalAlignment="Left" Margin="32,111,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="6" HorizontalAlignment="Left" Margin="32,177,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="5" HorizontalAlignment="Left" Margin="32,243,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="4" HorizontalAlignment="Left" Margin="32,309,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="3" HorizontalAlignment="Left" Margin="32,375,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="2" HorizontalAlignment="Left" Margin="32,441,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="1" HorizontalAlignment="Left" Margin="32,507,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="A" HorizontalAlignment="Left" Margin="80,560,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="B" HorizontalAlignment="Left" Margin="146,560,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="C" HorizontalAlignment="Left" Margin="212,560,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="D" HorizontalAlignment="Left" Margin="278,560,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="E" HorizontalAlignment="Left" Margin="344,560,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="F" HorizontalAlignment="Left" Margin="410,560,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="G" HorizontalAlignment="Left" Margin="475,560,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="H" HorizontalAlignment="Left" Margin="542,560,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label x:Name="SecondPlayerLabel" Visibility="Hidden" Content="Hamik" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="16" Height="32" Width="146"/>
+                <Label x:Name="FirstPlayerLabel" Visibility="Hidden" Content="Areg" HorizontalAlignment="Left" Margin="10,602,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontSize="16" Height="32" Width="146"/>
+                <Label Content="8" HorizontalAlignment="Left" Margin="32,64,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="7" HorizontalAlignment="Left" Margin="32,130,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="6" HorizontalAlignment="Left" Margin="32,196,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="5" HorizontalAlignment="Left" Margin="32,262,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="4" HorizontalAlignment="Left" Margin="32,328,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="3" HorizontalAlignment="Left" Margin="32,394,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="2" HorizontalAlignment="Left" Margin="32,460,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="1" HorizontalAlignment="Left" Margin="32,526,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="A" HorizontalAlignment="Left" Margin="80,580,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="B" HorizontalAlignment="Left" Margin="146,580,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="C" HorizontalAlignment="Left" Margin="212,580,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="D" HorizontalAlignment="Left" Margin="278,580,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="E" HorizontalAlignment="Left" Margin="344,580,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="F" HorizontalAlignment="Left" Margin="410,580,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="G" HorizontalAlignment="Left" Margin="475,580,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="H" HorizontalAlignment="Left" Margin="542,580,0,0" VerticalAlignment="Top" FontSize="18"/>
                 <!--Board-->
-                <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="530" VerticalAlignment="Top" Width="530" Margin="0,28,0,0">
+                <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="530" VerticalAlignment="Top" Width="530" Margin="0,47,0,0">
                     <Grid x:Name="Board">
 
                     </Grid>
@@ -37,13 +39,13 @@
         </Border>
 
         <!--Tabs Control-->
-        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="613" Margin="690,52,0,0" VerticalAlignment="Top" Width="231">
+        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="646" Margin="690,52,0,0" VerticalAlignment="Top" Width="231">
             <TabControl Margin="0 0 0 0">
                 <TabItem Header="Account" FontSize="13">
                     <Grid  Background="NavajoWhite" >
 
                         <!--SignIn Box-->
-                        <Border x:Name="SignInBox" BorderThickness="1" BorderBrush="Black" Margin="9,191,9,191" Visibility="Visible">
+                        <Border x:Name="SignInBox" BorderThickness="1" BorderBrush="Black" Margin="9,191,9,216" Visibility="Visible">
                             <Grid>
                                 <Label Content="Sign in" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
                                 <Label Content="Login" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="46" FontSize="14"/>
@@ -56,7 +58,7 @@
                                 </Button>
                             </Grid>
                         </Border>
-                        <Border x:Name="RegistrationBox" BorderThickness="1" BorderBrush="Black" Margin="9,321,9,10" Visibility="Hidden">
+                        <Border x:Name="RegistrationBox" BorderThickness="1" BorderBrush="Black" Margin="9,321,9,40" Visibility="Hidden">
                             <Grid>
                                 <Label Content="Registration" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
                                 <Label Content="Login" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="46" FontSize="14"/>
@@ -66,17 +68,17 @@
                                 <Label Content="Password" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" FontSize="14"/>
                                 <PasswordBox x:Name="RegisterSecondPassBox" HorizontalAlignment="Center" Margin="0,159,0,0" VerticalAlignment="Top" Width="174" Height="25" FontSize="14"/>
                                 <Button x:Name="RegistrationButton" Background="Goldenrod" Content="Registration" HorizontalAlignment="Center" Margin="0,194,0,0" VerticalAlignment="Top" Width="80" Height="26" Click="RegistrationButton_Click"/>
-                                <Button x:Name="ChangeViewLogin" BorderBrush="Transparent" Background="NavajoWhite" HorizontalAlignment="Center" Margin="0,220,0,0" VerticalAlignment="Top" Width="142" Click="ChangeViewLogin_Click">
+                                <Button x:Name="ChangeViewLogin" BorderBrush="Transparent" Background="NavajoWhite" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="142" Click="ChangeViewLogin_Click">
                                     <TextBlock TextDecorations="Underline">Back to login box</TextBlock>
                                 </Button>
                             </Grid>
                         </Border>
-                        <Border x:Name="PersonalAreaBox" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="561" VerticalAlignment="Center" Width="194" Visibility="Hidden">
+                        <Border x:Name="PersonalAreaBox" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="595" VerticalAlignment="Center" Width="194" Visibility="Hidden">
                             <Grid>
 
                                 <!--Last Matches-->
                                 <Label Content="Last Matches" HorizontalAlignment="Center" Height="31" Margin="0,354,0,0" VerticalAlignment="Top" Width="106" FontSize="16"/>
-                                <RichTextBox x:Name="LastMatches" Background="FloralWhite" IsReadOnly="True" HorizontalAlignment="Center" Height="159" Margin="0,390,0,0" VerticalAlignment="Top" Width="172"/>
+                                <RichTextBox x:Name="LastMatches" Background="FloralWhite" IsReadOnly="True" HorizontalAlignment="Center" Height="193" Margin="0,390,0,0" VerticalAlignment="Top" Width="172"/>
 
                                 <!--User Info-->
                                 <Label x:Name="UserNameLabel"   Content="Name" HorizontalAlignment="Center" Height="35" Margin="0,7,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="172" FontSize="19"/>
@@ -146,7 +148,7 @@
                         </Border>
 
                         <!--Logs-->
-                        <RichTextBox x:Name="Logs" IsReadOnly="True" Background="FloralWhite" HorizontalAlignment="Center" Height="281" Margin="0,292,0,0" VerticalAlignment="Top" Width="196"/>
+                        <RichTextBox x:Name="Logs" IsReadOnly="True" Background="FloralWhite" HorizontalAlignment="Center" Height="313" Margin="0,292,0,0" VerticalAlignment="Top" Width="196"/>
 
                         <!--Color Pick-->
                         <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="86" Margin="0,21,0,0" VerticalAlignment="Top" Width="196">
@@ -164,7 +166,7 @@
         </Border>
 
         <!--Top Menu-->
-        <Menu HorizontalAlignment="Center" Height="23" VerticalAlignment="Top" Width="960" FontSize="13">
+        <Menu HorizontalAlignment="Center" Height="23" VerticalAlignment="Top" Width="960" FontSize="14">
             <MenuItem x:Name="PlayBtn" Header="Play" Margin="7 0 0 0" Background="#00000000"/>
             <MenuItem x:Name="RestartBtn" Header="Restart"></MenuItem>
             <MenuItem x:Name="SaveBtn" Header="Save"></MenuItem>
@@ -215,14 +217,14 @@
 
         <!--Searching player-->
         <Grid RenderTransformOrigin="0.52,0.512">
-            <Border x:Name="ChoosePlayerWindow" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="161" Margin="188,0,0,0" VerticalAlignment="Center" Width="361" Background="Goldenrod">
+            <Border x:Name="ChoosePlayerWindow" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="149" Margin="168,0,0,0" VerticalAlignment="Center" Width="361" Background="PaleGoldenrod">
                 <Grid>
-                    <Button x:Name="p2" HorizontalAlignment="Left" Height="56" Margin="77,63,0,0" VerticalAlignment="Top" Width="56" Background="Tan"/>
-                    <Button x:Name="p3" HorizontalAlignment="Center" Height="66" VerticalAlignment="Top" Width="66" Background="Tan" Margin="0,58,0,0"/>
-                    <Button x:Name="p4" HorizontalAlignment="Left" Height="56" Margin="229,63,0,0" VerticalAlignment="Top" Width="56" Background="Tan"/>
-                    <Button x:Name="p5" HorizontalAlignment="Left" Height="42" Margin="299,70,0,0" VerticalAlignment="Top" Width="41" Background="Tan"/>
-                    <Button x:Name="p1" HorizontalAlignment="Left" Height="42" Margin="21,70,0,0" VerticalAlignment="Top" Width="41" Background="Tan"/>
-                    <Label Content="Searching player" HorizontalAlignment="Center" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" Width="126" FontSize="15"/>
+                    <Button x:Name="p2" HorizontalAlignment="Left" Height="56" Margin="77,63,0,0" VerticalAlignment="Top" Width="56" Background="PaleGoldenrod"/>
+                    <Button x:Name="p3" HorizontalAlignment="Center" Height="66" VerticalAlignment="Top" Width="66" Background="PaleGoldenrod" Margin="0,58,0,0"/>
+                    <Button x:Name="p4" HorizontalAlignment="Left" Height="56" Margin="229,63,0,0" VerticalAlignment="Top" Width="56" Background="PaleGoldenrod"/>
+                    <Button x:Name="p5" HorizontalAlignment="Left" Height="42" Margin="299,70,0,0" VerticalAlignment="Top" Width="41" Background="PaleGoldenrod"/>
+                    <Button x:Name="p1" HorizontalAlignment="Left" Height="42" Margin="21,70,0,0" VerticalAlignment="Top" Width="41" Background="PaleGoldenrod"/>
+                    <Label Content="Searching player" HorizontalAlignment="Center" Height="34" Margin="0,10,0,0" VerticalAlignment="Top" Width="144" FontSize="18"/>
                 </Grid>
             </Border>
         </Grid>

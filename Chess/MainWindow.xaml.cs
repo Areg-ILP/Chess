@@ -164,16 +164,34 @@ namespace Chess
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void PlayClick(object sender, EventArgs e)
+        private async void PlayClick(object sender, EventArgs e)
         {
-            if (ChessMaster.GameType == GameType.Endgame)
+            switch (ChessMaster.GameType)
             {
-                if (!ChessMaster.IsStartableGame()) return;
-                else CreationBorder.IsEnabled = false;
-            }
-            else
-            {
-                SearchingAnimation();
+                case GameType.Endgame:
+                    if (!ChessMaster.IsStartableGame())
+                    {
+                        MessageBox.Show("Place figures!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else CreationBorder.IsEnabled = false;
+                    break;
+                case GameType.PVP:
+                    await SearchingAnimation();
+                    MessageBoxResult play = MessageBox.Show("Are you ready?", "Info", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    switch (play)
+                    {
+                        case MessageBoxResult.Yes:
+                            ChoosePlayerWindow.Visibility = Visibility.Hidden;
+                            //SetFrontEndForGame
+                            break;
+                        case MessageBoxResult.No:
+                            ChoosePlayerWindow.Visibility = Visibility.Hidden;
+                            return;
+                    }
+                    break;
+                case GameType.Horsepath:
+                    return;
             }
 
             SetMoveEventsFlag(true);
@@ -379,7 +397,7 @@ namespace Chess
         {
             SignInBox.Visibility = Visibility.Hidden;
             RegistrationBox.Visibility = Visibility.Visible;
-            RegistrationBox.Margin = new Thickness(9, 175, 9, 160);
+            RegistrationBox.Margin = new Thickness(9, 175, 9, 180);
         }
 
         /// <summary>
@@ -1000,7 +1018,7 @@ namespace Chess
 
         private Button[] _searchingButtons;
 
-        private async void SearchingAnimation()
+        private async Task SearchingAnimation()
         {
             await Task.Run(() =>
             {
@@ -1009,7 +1027,7 @@ namespace Chess
                     ChoosePlayerWindow.Visibility = Visibility.Visible;
                     _searchingButtons = new Button[5]
                     {
-                p1,p2,p3,p4,p5
+                        p1,p2,p3,p4,p5
                     };
 
                     for (int i = 0; i < _searchingButtons.Length; i++)
@@ -1017,22 +1035,23 @@ namespace Chess
                         _searchingButtons[i].Content = ViewManager.GetPlayerIcon();
                     }
                 });
-                for (int i = 0; i < 6; i++)
+                for (int i = 0,speed = 100; i < 6 && speed > 0; i++,speed-= new Random().Next(1,5))
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        if (i == 4)
-                            i = 0;
+                        if (i == 4) i = 0;
                         _searchingButtons[i + 1].Content = _searchingButtons[i].Content;
                         _searchingButtons[i].Content = ViewManager.GetPlayerIcon();
                     });
-                    Thread.Sleep(100);
+                    Thread.Sleep(speed);
                 }
+                Thread.Sleep(500);
             }
             );
 
         }
 
         #endregion
+
     }
 }
