@@ -8,15 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="a1.png" />
+    <None Remove="a2.png" />
+    <None Remove="a3.png" />
+    <None Remove="a4.png" />
+    <None Remove="a5.png" />
+    <None Remove="a6.png" />
     <None Remove="BlackBishop.png" />
     <None Remove="BlackHorse.png" />
     <None Remove="BlackKing.png" />
     <None Remove="BlackPawn.png" />
     <None Remove="BlackQueen.png" />
     <None Remove="BlackRook.png" />
+    <None Remove="Bot.png" />
     <None Remove="EndGame.png" />
     <None Remove="GrayRecomend.png" />
     <None Remove="PVP.png" />
+    <None Remove="Unknwon.png" />
     <None Remove="WhiteBishop.png" />
     <None Remove="WhiteHorse.png" />
     <None Remove="WhiteKing.png" />
@@ -30,6 +38,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Img\Bot.png" />
+    <Resource Include="Img\a1.png" />
+    <Resource Include="Img\a2.png" />
+    <Resource Include="Img\a3.png" />
+    <Resource Include="Img\a4.png" />
+    <Resource Include="Img\a5.png" />
+    <Resource Include="Img\a6.png" />
     <Resource Include="Img\EndGame.png" />
     <Resource Include="Img\Github.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -51,6 +66,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\PVP.png" />
+    <Resource Include="Img\Unknwon.png" />
   </ItemGroup>
 
 </Project>

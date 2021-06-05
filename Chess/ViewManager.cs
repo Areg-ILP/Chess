@@ -102,21 +102,66 @@ namespace Chess
 
         #region Methods to get player icons
 
+        private const string _botImagePath = @"Img\Bot.png";
+        private const string _unKnownImagePath = @"Img\Unknwon.png";
+
         private static int _currentplayer;
         private static string[] _players = new string[6]
         {
-            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a1.png",
-            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a2.png",
-            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a3.png",
-            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a4.png",
-            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a5.png",
-            @"C:\Users\Admin\source\repos\Chess\Chess\Img\a6.png",
+            @"Img\a1.png",
+            @"Img\a2.png",
+            @"Img\a3.png",
+            @"Img\a4.png",
+            @"Img\a5.png",
+            @"Img\a6.png",
         };
+
+        public static Image GetPlayerIconWithoutCounting()
+        {
+            return new Image() { Source = new BitmapImage(new Uri(_players[_currentplayer], UriKind.Relative)) };
+        }
+
+        public static string GetPlayerViewName()
+        {
+            var name = string.Empty;
+            switch (_currentplayer)
+            {
+                case 1:
+                    name += "German";
+                    break;
+                case 2:
+                    name += "Katarin";
+                    break;
+                case 3:
+                    name += "Jhon";
+                    break;
+                case 4:
+                    name += "Donald";
+                    break;
+                case 5:
+                    name += "Maria";
+                    break;
+                case 6:
+                    name += "Annie";
+                    break;
+            }
+            return name;
+        }
 
         public static Image GetPlayerIcon()
         {
-            if (_currentplayer == _players.Length - 1) _currentplayer = 0;
-            return new Image() { Source = new BitmapImage(new Uri(_players[_currentplayer++])) };
+            if (_currentplayer == _players.Length) _currentplayer = 0;
+            return new Image() { Source = new BitmapImage(new Uri(_players[_currentplayer++], UriKind.Relative)) };
+        }
+
+        public static Image GetBotIcon()
+        {
+            return new Image() { Source = new BitmapImage(new Uri(_botImagePath, UriKind.Relative)) };
+        }
+
+        public static Image GetUnKnownImage()
+        {
+            return new Image() { Source = new BitmapImage(new Uri(_unKnownImagePath, UriKind.Relative)) };
         }
 
         #endregion

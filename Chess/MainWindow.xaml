@@ -11,26 +11,26 @@
         <!--Board-->
         <Border Background="NavajoWhite" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="646" Margin="23,52,0,0" VerticalAlignment="Top" Width="645">
             <Grid>
-                <Label x:Name="SecondPlayerLabel" Visibility="Hidden" Content="Hamik" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="16" Height="32" Width="146"/>
-                <Label x:Name="FirstPlayerLabel" Visibility="Hidden" Content="Areg" HorizontalAlignment="Left" Margin="10,602,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontSize="16" Height="32" Width="146"/>
-                <Label Content="8" HorizontalAlignment="Left" Margin="32,64,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="7" HorizontalAlignment="Left" Margin="32,130,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="6" HorizontalAlignment="Left" Margin="32,196,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="5" HorizontalAlignment="Left" Margin="32,262,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="4" HorizontalAlignment="Left" Margin="32,328,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="3" HorizontalAlignment="Left" Margin="32,394,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="2" HorizontalAlignment="Left" Margin="32,460,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="1" HorizontalAlignment="Left" Margin="32,526,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="A" HorizontalAlignment="Left" Margin="80,580,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="B" HorizontalAlignment="Left" Margin="146,580,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="C" HorizontalAlignment="Left" Margin="212,580,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="D" HorizontalAlignment="Left" Margin="278,580,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="E" HorizontalAlignment="Left" Margin="344,580,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="F" HorizontalAlignment="Left" Margin="410,580,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="G" HorizontalAlignment="Left" Margin="475,580,0,0" VerticalAlignment="Top" FontSize="18"/>
-                <Label Content="H" HorizontalAlignment="Left" Margin="542,580,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Image x:Name="OpponentImage" Source="/Img/Unknwon.png" Visibility="Visible" HorizontalAlignment="Left" Height="54" Margin="6,6,0,0" VerticalAlignment="Top" Width="50"/>
+                <Label x:Name="OpponentLoginLabel" Visibility="Visible" Content="Opponent" HorizontalAlignment="Left" Margin="61,13,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="16" Height="32" Width="146"/>
+                <Label Content="8" HorizontalAlignment="Left" Margin="32,74,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="7" HorizontalAlignment="Left" Margin="32,140,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="6" HorizontalAlignment="Left" Margin="32,206,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="5" HorizontalAlignment="Left" Margin="32,272,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="4" HorizontalAlignment="Left" Margin="32,338,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="3" HorizontalAlignment="Left" Margin="32,404,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="2" HorizontalAlignment="Left" Margin="32,470,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="1" HorizontalAlignment="Left" Margin="32,536,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="A" HorizontalAlignment="Left" Margin="80,590,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="B" HorizontalAlignment="Left" Margin="146,590,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="C" HorizontalAlignment="Left" Margin="212,590,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="D" HorizontalAlignment="Left" Margin="278,590,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="E" HorizontalAlignment="Left" Margin="344,590,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="F" HorizontalAlignment="Left" Margin="410,590,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="G" HorizontalAlignment="Left" Margin="475,590,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="H" HorizontalAlignment="Left" Margin="542,590,0,0" VerticalAlignment="Top" FontSize="18"/>
                 <!--Board-->
-                <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="530" VerticalAlignment="Top" Width="530" Margin="0,47,0,0">
+                <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Center" Height="530" VerticalAlignment="Top" Width="530" Margin="0,57,0,0">
                     <Grid x:Name="Board">
 
                     </Grid>
@@ -166,7 +166,7 @@
         </Border>
 
         <!--Top Menu-->
-        <Menu HorizontalAlignment="Center" Height="23" VerticalAlignment="Top" Width="960" FontSize="14">
+        <Menu x:Name="TopMenu" HorizontalAlignment="Center" Height="23" VerticalAlignment="Top" Width="960" FontSize="14">
             <MenuItem x:Name="PlayBtn" Header="Play" Margin="7 0 0 0" Background="#00000000"/>
             <MenuItem x:Name="RestartBtn" Header="Restart"></MenuItem>
             <MenuItem x:Name="SaveBtn" Header="Save"></MenuItem>

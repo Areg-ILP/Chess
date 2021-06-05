@@ -118,7 +118,7 @@ namespace Chess.Model.Models
             foreach (var currentPossible in possiblePoints)
             {
                 var tempPoint = this.Position + currentPossible;
-                if (Point.IsValid(tempPoint) && IsPossibleMove(tempPoint)
+                if (Point.IsValid(tempPoint)
                      && chessBoard.GetFigureByPercolate(f => f.Position == tempPoint) == null)
                     possibleMoves.Add(tempPoint);
                 else break;

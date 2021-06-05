@@ -14,38 +14,14 @@ namespace Chess.Model.Models
         /// </summary>
         protected override List<List<Point>> PossiblePoints => new List<List<Point>>
         {
-            new List<Point>()
-            {
-                new Point(1,0)
-            },
-            new List<Point>()
-            {
-                new Point(0,1)                
-            },
-            new List<Point>()
-            {
-                new Point(1,-1)
-            },
-            new List<Point>()
-            {
-                new Point(-1,1)
-            },
-            new List<Point>()
-            {
-                new Point(-1,0)
-            },
-            new List<Point>()
-            {
-                 new Point(0,-1),
-            },
-            new List<Point>()
-            {
-                new Point(-1,-1)
-            },
-            new List<Point>()
-            {
-                new Point(1,1)
-            }
+            new List<Point>(){ new Point(1,0) },
+            new List<Point>(){ new Point(0,1) },
+            new List<Point>(){ new Point(1,-1) },
+            new List<Point>(){ new Point(-1,1) },
+            new List<Point>(){ new Point(-1,0) },
+            new List<Point>(){ new Point(0,-1),},
+            new List<Point>(){ new Point(-1,-1)},
+            new List<Point>(){ new Point(1,1) }
         };
 
         /// <summary>
@@ -64,7 +40,7 @@ namespace Chess.Model.Models
         /// Value of figure by chess rools
         /// </summary>
         public override int Value => 0;
-        
+
         /// <summary>
         /// Method vor move figure
         /// </summary>
@@ -73,9 +49,9 @@ namespace Chess.Model.Models
         /// <returns>true if moved else false</returns>
         public override bool Move(Point nextPoint, ChessBoard chessBoard)
         {
-            if(IsCastlingMove(nextPoint))
+            if (IsCastlingMove(nextPoint))
             {
-                var rookPosition = (nextPoint.Y - this.Position.Y > 0) ? new Point(this.Position.X,7) : new Point(this.Position.X,0);
+                var rookPosition = (nextPoint.Y - this.Position.Y > 0) ? new Point(this.Position.X, 7) : new Point(this.Position.X, 0);
                 var rookCastlingPosition = (nextPoint.Y - this.Position.Y > 0) ? new Point(this.Position.X, this.Position.Y + 1)
                                                                             : new Point(this.Position.X, this.Position.Y - 1);
                 var rookToCastle = chessBoard.GetFigureByPercolate(r => r.Position == rookPosition);
@@ -105,7 +81,7 @@ namespace Chess.Model.Models
                     var figureToCheck = chessBoard.GetFigureByPercolate(f => f.Position == tempPoint);
                     if (figureToCheck != null && figureToCheck?.Color == this.Color)
                         continue;
-                    if (Point.IsValid(tempPoint) && IsPossibleMove(tempPoint))
+                    if (Point.IsValid(tempPoint))
                     {
                         possibleMoves.Add(tempPoint);
                     }
@@ -113,7 +89,7 @@ namespace Chess.Model.Models
             }
             return possibleMoves;
         }
-        
+
         /// <summary>
         /// Get possible moves of figure
         /// </summary>
@@ -137,13 +113,13 @@ namespace Chess.Model.Models
         /// <param name="point">next position</param>
         /// <param name="chessBoard">chessboard</param>
         /// <returns>true if given point is safe else false</returns>
-        private bool IsSafeMove(Point point,ChessBoard chessBoard)
+        private bool IsSafeMove(Point point, ChessBoard chessBoard)
         {
             var enemyFigures = chessBoard.GetAllFiguresByPercolate(f => f.Color != this.Color);
             List<Point> dangerPoints;
             foreach (var enemy in enemyFigures)
             {
-                switch(enemy.ToString())
+                switch (enemy.ToString())
                 {
                     case "King":
                         dangerPoints = ((King)enemy).GetPossiblePoints(chessBoard);
@@ -179,7 +155,7 @@ namespace Chess.Model.Models
         public List<Point> GetCastlingPoints(ChessBoard chessBoard)
         {
             var castlingPoints = new List<Point>();
-            if( !_moved && !chessBoard.IsPointUnderCheck(this.Position, this.Color))
+            if (!_moved && !chessBoard.IsPointUnderCheck(this.Position, this.Color))
             {
                 var rooks = chessBoard.GetAllFiguresByPercolate(r => r.ToString() == "Rook"
                                                                     && r.Color == this.Color);
@@ -187,9 +163,9 @@ namespace Chess.Model.Models
                 {
                     foreach (var rook in rooks)
                     {
-                        if(!((Rook)rook).Moved)
+                        if (!((Rook)rook).Moved)
                         {
-                            if(rook.Position.Y == 0)
+                            if (rook.Position.Y == 0)
                             {
                                 var leftPath = new List<Point>();
                                 for (int y = 1; y < this.Position.Y; y++)
@@ -199,7 +175,7 @@ namespace Chess.Model.Models
                                 if (IsSafePath(leftPath, chessBoard))
                                     castlingPoints.Add(new Point(this.Position.X, this.Position.Y - 2));
                             }
-                            else if(rook.Position.Y == 7)
+                            else if (rook.Position.Y == 7)
                             {
                                 var rightPath = new List<Point>();
                                 for (int y = this.Position.Y + 1; y < 7; y++)
@@ -222,7 +198,7 @@ namespace Chess.Model.Models
         /// <param name="castlingPath">castling path of points list</param>
         /// <param name="chessBoard">chessboard</param>
         /// <returns>true if safe path else false</returns>
-        private bool IsSafePath(List<Point> castlingPath,ChessBoard chessBoard)
+        private bool IsSafePath(List<Point> castlingPath, ChessBoard chessBoard)
         {
             foreach (var pathPoint in castlingPath)
             {

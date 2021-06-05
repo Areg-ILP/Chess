@@ -26,7 +26,6 @@ namespace Chess.Data.Models
         /// <summary>
         /// Logs of party
         /// </summary>
-        [JsonRequired]
         [JsonProperty("Logs")]
         public List<Log> Logs { get; set; }
 

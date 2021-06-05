@@ -140,8 +140,8 @@ namespace Chess
         /// </summary>
         private void SetEventsBeforeLogin()
         {
-            //LinkedInButton.Click += OpenLinkedInPage;
-            //GitHubButton.Click += OpenGitHubPage;
+            LinkedInButton.Click += OpenLinkedInPage;
+            GitHubButton.Click += OpenGithubPage;
         }
 
         /// <summary>
@@ -162,8 +162,6 @@ namespace Chess
         /// <summary>
         /// Event: play button click
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private async void PlayClick(object sender, EventArgs e)
         {
             switch (ChessMaster.GameType)
@@ -183,17 +181,14 @@ namespace Chess
                     {
                         case MessageBoxResult.Yes:
                             ChoosePlayerWindow.Visibility = Visibility.Hidden;
-                            //SetFrontEndForGame
+                            SetOpponentSettings(true);
                             break;
                         case MessageBoxResult.No:
                             ChoosePlayerWindow.Visibility = Visibility.Hidden;
                             return;
                     }
                     break;
-                case GameType.Horsepath:
-                    return;
             }
-
             SetMoveEventsFlag(true);
             PlayBtn.IsEnabled = false;
         }
@@ -217,6 +212,9 @@ namespace Chess
                     CreationBorder.IsEnabled = true;
                     break;
             }
+            SetMoveEventsFlag(false);
+            SetOpponentSettings(false);
+            PlayBtn.IsEnabled = true;
             _logsCounter = 0;
             Logs.Document.Blocks.Clear();
             SetAllFiguresImages();
@@ -260,7 +258,8 @@ namespace Chess
         {
             ChessMaster.SetModeEndgame();
             OnChangeMode();
-
+            SetOpponentSettings(false);
+            SetMoveEventsFlag(false);
             ChooseFigureBox.Items.Clear();
             ChooseFigureBox.Items.Add("King");
             ChooseFigureBox.Items.Add("Queen");
@@ -277,7 +276,8 @@ namespace Chess
         {
             ChessMaster.SetModeHorsePath();
             OnChangeMode();
-
+            SetOpponentSettings(false);
+            SetMoveEventsFlag(false);
             ChooseFigureBox.Items.Clear();
             ChooseFigureBox.Items.Add("Horse");
         }
@@ -289,6 +289,8 @@ namespace Chess
         {
             ChessMaster.SetModePVP();
             OnChangeMode();
+            SetOpponentSettings(false);
+            SetMoveEventsFlag(false);
         }
 
         /// <summary>
@@ -296,9 +298,20 @@ namespace Chess
         /// </summary>
         private void OnChangeMode()
         {
-            GameDebuff();
+            GameDebuff(true);
             ImageVipe();
             SetAllFiguresImages();
+        }
+
+        //mb
+        private void OpenLinkedInPage(object sender,EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.linkedin.com/in/areg-gevorgyan-264a68204/");
+        }
+
+        private void OpenGithubPage(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Areg-ILP");
         }
 
         #endregion
@@ -452,13 +465,14 @@ namespace Chess
             {
                 FigureName = ChooseFigureBox.Text,
                 ColorFlag = WhiteFigureCheckBox.IsChecked == true,
-                Position = (--y, --x)
+                Position = (Math.Abs(--y - 7), --x)
             };
 
             if (ChessMaster.AppendFigure(figureViewModel))
             {
                 SetFigureImage(figureViewModel);
                 ClearCreateBoxComponents();
+                CreationBorder.IsEnabled = (ChessMaster.GameType == GameType.Horsepath) ? false : true;
             }
             else
             {
@@ -670,7 +684,7 @@ namespace Chess
                         SetAllFiguresImages();
                         if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag))
                         {
-                            GameDebuff();
+                            GameDebuff(false);
                             SetMoveEventsFlag(false);
                         }
                         break;
@@ -689,7 +703,7 @@ namespace Chess
         /// <summary>
         /// Debuff game
         /// </summary>
-        private void GameDebuff()
+        private void GameDebuff(bool playFlag)
         {
             _logsCounter = 0;
             Logs.Document.Blocks.Clear();
@@ -698,7 +712,7 @@ namespace Chess
             WhiteColorPickBox.IsEnabled = true;
             BlackColorPickBox.IsEnabled = true;
             CreationBorder.IsEnabled = false;
-            PlayBtn.IsEnabled = true;
+            PlayBtn.IsEnabled = playFlag;
         }
 
         /// <summary>
@@ -802,8 +816,8 @@ namespace Chess
         /// <param name="finalPosition">final position</param>
         private void SetLogs(FigureViewModel figure, (int X, int Y) finalPosition)
         {
-            var start = AlhpabetHelper.GetCoordinates(Math.Abs(figure.Position.X - 7), Math.Abs(figure.Position.Y));
-            var end = AlhpabetHelper.GetCoordinates(Math.Abs(finalPosition.X - 7), Math.Abs(finalPosition.Y));
+            var start = AlhpabetHelper.GetCoordinates(Math.Abs(figure.Position.X - 7), figure.Position.Y);
+            var end = AlhpabetHelper.GetCoordinates(Math.Abs(finalPosition.X - 7), finalPosition.Y);
             Logs.AppendText(figure.ColorFlag ? "Whites" : "Blacks");
             Logs.AppendText($"\n {++_logsCounter} : {figure.FigureName} : {start} to {end}\n");
         }
@@ -834,9 +848,11 @@ namespace Chess
                 var horsePath = ChessMaster.GetPathForHorseTask(start, end);
                 //front
                 SetMoveEventsFlag(false);
+                TopMenu.IsEnabled = false;
                 await ShowAsync(horsePath);
                 SetLogsForHorsePath(horsePath);
                 SetMoveEventsFlag(true);
+                TopMenu.IsEnabled = true;
             }
         }
 
@@ -944,15 +960,8 @@ namespace Chess
             ImageVipe();
             SetAllFiguresImages();
             FigureChooseBorder.Visibility = Visibility.Hidden;
-
-            if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag))
-            {
-                GameDebuff();
-            }
-            else
-            {
-                SetMoveEventsFlag(true);
-            }
+            if (CheckGameEventsInBoard(_currentFigureOnClick.ColorFlag)) GameDebuff(false);
+            else SetMoveEventsFlag(true);
         }
 
         /// <summary>
@@ -1035,20 +1044,45 @@ namespace Chess
                         _searchingButtons[i].Content = ViewManager.GetPlayerIcon();
                     }
                 });
-                for (int i = 0,speed = 100; i < 6 && speed > 0; i++,speed-= new Random().Next(1,5))
+                for (int i = 0,speed = 110; speed > 0;speed-= new Random().Next(1,5))
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         if (i == 4) i = 0;
                         _searchingButtons[i + 1].Content = _searchingButtons[i].Content;
-                        _searchingButtons[i].Content = ViewManager.GetPlayerIcon();
+                        _searchingButtons[i++].Content = ViewManager.GetPlayerIcon();
                     });
                     Thread.Sleep(speed);
                 }
                 Thread.Sleep(500);
-            }
-            );
+            });
+        }
 
+        private void SetOpponentSettings(bool beforeSearching)
+        {
+            switch(ChessMaster.GameType)
+            {
+                case GameType.PVP:
+                    if(beforeSearching)
+                    {
+                        OpponentImage.Source = (p3.Content as Image).Source;
+                        OpponentLoginLabel.Content = ViewManager.GetPlayerViewName();
+                    }
+                    else
+                    {
+                        OpponentImage.Source = ViewManager.GetUnKnownImage().Source;
+                        OpponentLoginLabel.Content = "Opponent";
+                    }
+                    break;
+                case GameType.Endgame:
+                    OpponentImage.Source = ViewManager.GetBotIcon().Source;
+                    OpponentLoginLabel.Content = "Ja.Fee (Bot)";
+                    break;
+                case GameType.Horsepath:
+                    OpponentImage.Source = ViewManager.GetBotIcon().Source;
+                    OpponentLoginLabel.Content = "Solver (Bot)";
+                    break;
+            }
         }
 
         #endregion
