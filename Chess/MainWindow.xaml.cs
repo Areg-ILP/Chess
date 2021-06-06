@@ -1076,11 +1076,11 @@ namespace Chess
                     break;
                 case GameType.Endgame:
                     OpponentImage.Source = ViewManager.GetBotIcon().Source;
-                    OpponentLoginLabel.Content = "Ja.Fee (Bot)";
+                    OpponentLoginLabel.Content = "End-Gamer (Bot)";
                     break;
                 case GameType.Horsepath:
                     OpponentImage.Source = ViewManager.GetBotIcon().Source;
-                    OpponentLoginLabel.Content = "Solver (Bot)";
+                    OpponentLoginLabel.Content = "Path Solver (Bot)";
                     break;
             }
         }
