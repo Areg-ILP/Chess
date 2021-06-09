@@ -9,7 +9,7 @@ namespace Chess.Data.Services
 {
     internal class BaseService<T> : IBaseService<T> where T : Entity
     {
-        private const string _dataPath = @"C:\Users\Admin\source\repos\Chess\Chess.Data\bin\Debug\net5.0\UserData.json";
+        private const string _dataPath = @"UserData.json";
 
         public T Get(int? id)
         {

@@ -14,4 +14,10 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="UserData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

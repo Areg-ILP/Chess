@@ -619,8 +619,6 @@ namespace Chess
         /// <summary>
         /// Main click function for all cells
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CellClick(object sender, EventArgs e)
         {
             switch (ChessMaster.GameType)
@@ -896,10 +894,10 @@ namespace Chess
             Logs.Document.Blocks.Clear();
             for (int i = path.Count - 2; i >= 0; i--)
             {
-                Logs.AppendText(AlhpabetHelper.GetCoordinates(path[i].x, path[i].y) + "->");
+                Logs.AppendText(AlhpabetHelper.GetCoordinates(Math.Abs(path[i].x-7), path[i].y) + "->");
             }
             var lastPoint = ChessMaster.GetAllFiguresViewModel()[0].Position;
-            Logs.AppendText(AlhpabetHelper.GetCoordinates(lastPoint.X, lastPoint.Y));
+            Logs.AppendText(AlhpabetHelper.GetCoordinates(Math.Abs(lastPoint.X-7), lastPoint.Y));
         }
 
         #endregion

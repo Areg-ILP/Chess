@@ -1,0 +1,101 @@
+[
+  {
+    "Login": "admin",
+    "Password": "admin",
+    "PartyCounter": 7,
+    "WinCounter": 5,
+    "LoseCounter": 1,
+    "UnicalId": 1,
+    "CreationDate": "2021-05-24T00:00:00+04:00"
+  },
+  {
+    "Login": "Hamlet",
+    "Password": "12345",
+    "PartyCounter": 0,
+    "WinCounter": 0,
+    "LoseCounter": 0,
+    "UnicalId": 2,
+    "CreationDate": "2021-05-24T00:00:00+04:00"
+  },
+  {
+    "Login": "Narek",
+    "Password": "amerika",
+    "PartyCounter": 0,
+    "WinCounter": 0,
+    "LoseCounter": 0,
+    "UnicalId": 3,
+    "CreationDate": "2021-05-24T00:00:00+04:00"
+  },
+  {
+    "Login": "Artyom",
+    "Password": "qwerty",
+    "PartyCounter": 0,
+    "WinCounter": 0,
+    "LoseCounter": 0,
+    "UnicalId": 4,
+    "CreationDate": "2021-05-24T00:00:00+04:00"
+  },
+  {
+    "Login": "Nare",
+    "Password": "inform",
+    "PartyCounter": 0,
+    "WinCounter": 0,
+    "LoseCounter": 0,
+    "UnicalId": 5,
+    "CreationDate": "2021-05-24T00:00:00+04:00"
+  },
+  {
+    "Login": "Davo",
+    "Password": "mustang123",
+    "PartyCounter": 0,
+    "WinCounter": 0,
+    "LoseCounter": 0,
+    "UnicalId": 5,
+    "CreationDate": "2021-05-25T00:00:00+04:00"
+  },
+  {
+    "Login": "Arsen",
+    "Password": "exvard",
+    "PartyCounter": 0,
+    "WinCounter": 0,
+    "LoseCounter": 0,
+    "UnicalId": 6,
+    "CreationDate": "2021-05-25T00:00:00+04:00"
+  },
+  {
+    "Login": "AramRamos",
+    "Password": "Armenia123",
+    "PartyCounter": 0,
+    "WinCounter": 0,
+    "LoseCounter": 0,
+    "UnicalId": 7,
+    "CreationDate": "2021-05-28T00:00:00+04:00"
+  },
+  {
+    "Login": "NarekSTL",
+    "Password": "qwerty",
+    "PartyCounter": 0,
+    "WinCounter": 0,
+    "LoseCounter": 0,
+    "UnicalId": 8,
+    "CreationDate": "2021-05-31T00:00:00+04:00"
+  },
+  {
+    "Login": "Narine1234567",
+    "Password": "123",
+    "PartyCounter": 0,
+    "WinCounter": 0,
+    "LoseCounter": 0,
+    "UnicalId": 9,
+    "CreationDate": "2021-05-31T00:00:00+04:00"
+  },
+  {
+    "Login": "Lyov",
+    "Password": "xojalu",
+    "PartyCounter": 0,
+    "WinCounter": 0,
+    "LoseCounter": 0,
+    "UnicalId": 10,
+    "CreationDate": "2021-06-01T00:00:00+04:00"
+  }
+]
