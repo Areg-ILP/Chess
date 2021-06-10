@@ -77,8 +77,8 @@
                             <Grid>
 
                                 <!--Last Matches-->
-                                <Label Content="Last Matches" HorizontalAlignment="Center" Height="31" Margin="0,354,0,0" VerticalAlignment="Top" Width="106" FontSize="16"/>
-                                <RichTextBox x:Name="LastMatches" Background="FloralWhite" IsReadOnly="True" HorizontalAlignment="Center" Height="193" Margin="0,390,0,0" VerticalAlignment="Top" Width="172"/>
+                                <Label Content="Last Matches" HorizontalAlignment="Center" Height="31" Margin="0,316,0,0" VerticalAlignment="Top" Width="106" FontSize="16"/>
+                                <RichTextBox x:Name="LastMatches" Background="FloralWhite" IsReadOnly="True" HorizontalAlignment="Center" Height="231" Margin="0,352,0,0" VerticalAlignment="Top" Width="172"/>
 
                                 <!--User Info-->
                                 <Label x:Name="UserNameLabel"   Content="Name" HorizontalAlignment="Center" Height="35" Margin="0,7,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="172" FontSize="19"/>
@@ -96,10 +96,8 @@
                                 <Label Content="Generated - " HorizontalAlignment="Left" Height="30" Margin="10,206,0,0" VerticalAlignment="Top" Width="109" FontSize="15"/>
 
                                 <!--Statistics-->
-                                <Label Content="Win rate" HorizontalAlignment="Left" Height="30" Margin="10,244,0,0" VerticalAlignment="Top" Width="73" FontSize="14"/>
+                                <Label Content="Win rate" HorizontalAlignment="Left" Height="30" Margin="10,249,0,0" VerticalAlignment="Top" Width="73" FontSize="14"/>
                                 <ProgressBar x:Name="WinRateBar" HorizontalAlignment="Center" Height="18" Margin="0,279,0,0" VerticalAlignment="Top" Width="172"/>
-                                <Label Content="Draw rate" HorizontalAlignment="Left" Height="30" Margin="10,296,0,0" VerticalAlignment="Top" Width="73" FontSize="14"/>
-                                <ProgressBar x:Name="DrawRateBar" HorizontalAlignment="Center" Height="18" Margin="0,326,0,0" VerticalAlignment="Top" Width="172"/>
                             </Grid>
                         </Border>
                     </Grid>

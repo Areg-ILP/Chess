@@ -438,10 +438,7 @@ namespace Chess
             UserDrawCountLabel.Content = user.DrawCount;
             UserCreationDateLabel.Content = user.CreationDate;
             if (user.PartyCount != 0)
-            {
                 WinRateBar.Value = user.WinCount * 100 / user.PartyCount;
-                DrawRateBar.Value = user.DrawCount * 100 / user.PartyCount;
-            }
         }
 
         #endregion
