@@ -1,21 +1,21 @@
 ﻿using Chess.Data.Models;
-using Chess.Data.Services;
+using Chess.Data.RepositoryPatterns;
 
 namespace Chess.Data
 {
     /// <summary>
     /// Class for get services, (di)
     /// </summary>
-    public static class ServiceHelper
+    public static class RepositoryHelper
     {
         /// <summary>
         /// method to get service
         /// </summary>
         /// <typeparam name="T">ervice entity type</typeparam>
         /// <returns>service</returns>
-        public static IBaseService<T> GetService<T>() where T : Entity
+        public static IBaseRepository<T> GetRepository<T>() where T : Entity
         {
-            return new BaseService<T>();
+            return new BaseRepository<T>();
         }
     }
 }

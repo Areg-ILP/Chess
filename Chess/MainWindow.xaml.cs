@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Chess.Logic;
 using Chess.Logic.Data_Managment;
 using Chess.Logic.Game_Mangement;
@@ -294,7 +285,7 @@ namespace Chess
         }
 
         /// <summary>
-        /// Function for change mode modifications
+        /// Method for change mode modifications
         /// </summary>
         private void OnChangeMode()
         {
@@ -1020,8 +1011,15 @@ namespace Chess
 
         #region Searching Player
 
+        /// <summary>
+        /// Searching buttons array
+        /// </summary>
         private Button[] _searchingButtons;
 
+        /// <summary>
+        /// Searching animation runer
+        /// </summary>
+        /// <returns></returns>
         private async Task SearchingAnimation()
         {
             await Task.Run(() =>
@@ -1053,6 +1051,10 @@ namespace Chess
             });
         }
 
+        /// <summary>
+        /// Set opponent settings
+        /// </summary>
+        /// <param name="beforeSearching">flag of searching</param>
         private void SetOpponentSettings(bool beforeSearching)
         {
             switch(ChessMaster.GameType)

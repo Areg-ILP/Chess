@@ -1,25 +1,22 @@
 ﻿using Chess.Data;
 using Chess.Data.Models;
-using Chess.Data.Services;
+using Chess.Data.RepositoryPatterns;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Chess.Logic.Data_Managment
 {
     public static class UserManager
     {
-        private static IBaseService<User> _userService;
+        private static IBaseRepository<User> _userRepository;
 
         static UserManager()
         {
-            _userService = ServiceHelper.GetService<User>();
+            _userRepository = RepositoryHelper.GetRepository<User>();
         }
 
         public static UserViewModel SignIn(string login, string password)
         {
-            var users = _userService.GetAll();
+            var users = _userRepository.GetAll();
 
             foreach (var user in users)
             {
@@ -43,7 +40,7 @@ namespace Chess.Logic.Data_Managment
 
         public static UserViewModel Registration(string login, string password)
         {
-            var users = _userService.GetAll();
+            var users = _userRepository.GetAll();
 
             foreach (var user in users)
             {
@@ -59,7 +56,7 @@ namespace Chess.Logic.Data_Managment
                 CreationDate = DateTime.Today
             };
 
-            _userService.Create(newUser);
+            _userRepository.Create(newUser);
 
             return new UserViewModel
             {

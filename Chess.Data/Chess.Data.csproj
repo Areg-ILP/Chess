@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ServiceHelper.cs">
+    <Compile Update="RepositoryHelper.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
